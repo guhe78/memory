@@ -1,44 +1,4 @@
-body {
-  height: 100vh;
-}
+@use "/src/styles/base/base";
+@use "/src/styles/base/typography";
 
-.card:hover {
-  cursor: pointer;
-}
-
-.card {
-  height: 100px;
-  aspect-ratio: 1/1;
-  background-color: transparent;
-  border: none;
-
-  &__inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: all 300ms ease-in-out;
-  }
-
-  &__face {
-    position: absolute;
-    inset: 0;
-    background-color: black;
-    backface-visibility: hidden;
-
-    &--back {
-      transform: rotateY(180deg);
-      background-color: red;
-      color: white;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 48px;
-    }
-  }
-
-  &.is-flipped .card__inner {
-    transform: rotateY(180deg);
-  }
-}
+@use "/src/styles/pages/home";
