@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="/favicon/manifest.json" />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png" />
     <meta name="theme-color" content="#ffffff" />
@@ -24,9 +24,13 @@
     <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body>
-    <h2>It's play time.</h2>
-    <h1 id="title">Ready to play?</h1>
-    <section id="field"></section>
+    <main class="main-welcome">
+      <section class="headline-welcome">
+        <h2 class="headline-subtitle">It's play time.</h2>
+        <h1 class="headline-title" id="title">Ready to play?</h1>
+      </section>
+      <button class="start-button" id="start-button"></button>
+    </main>
     <script type="module" src="./src/main.ts"></script>
   </body>
 </html>

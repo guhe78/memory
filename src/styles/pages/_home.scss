@@ -1,0 +1,56 @@
+@use "../abstract/mixin";
+
+.headline-title {
+  font-family: "Red Rose";
+  font-size: 140px;
+  font-weight: 700;
+}
+
+.headline-subtitle {
+  font-family: "Almarai Regular";
+  font-size: 48px;
+}
+
+.main-welcome {
+  @include mixin.flex-center(column);
+  height: 100vh;
+  gap: 85px;
+}
+
+.start-button {
+  @include mixin.flex-center(row);
+  gap: 24px;
+
+  background-color: rgba(240, 234, 110, 1);
+  font-family: "Red Rose";
+  font-size: 40px;
+  font-weight: 700;
+
+  text-align: center;
+
+  width: 250px;
+  height: 98px;
+
+  transition: transform 0.2s ease-out;
+
+  & .arrow-icon-hover {
+    display: none;
+    width: 36px;
+  }
+
+  &:hover {
+    transform: scale(1.08, 1.04);
+
+    & .controller-icon {
+      transform: rotate(-23deg) scale(1.125);
+    }
+
+    & .arrow-icon {
+      display: none;
+    }
+
+    & .arrow-icon-hover {
+      display: block;
+    }
+  }
+}
