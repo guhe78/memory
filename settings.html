@@ -1,9 +1,101 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="/favicon/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memory</title>
   </head>
-  <body></body>
+  <body class="settings-body">
+    <main class="main-settings">
+      <div class="settings-left-container">
+        <h3 class="headline-subtitle">Settings</h3>
+        <div class="choose-container">
+          <h4>Game themes</h4>
+          <div class="inputs-wrapper">
+            <div class="input-wrapper">
+              <input type="radio" id="theme-code" name="theme" value="code" checked />
+              <label for="theme-code">Code vibes theme</label>
+              <div class="input-pointer">xXx</div>
+            </div>
+            <div class="input-wrapper">
+              <input type="radio" id="theme-gaming" name="theme" value="gaming" />
+              <label for="theme-gaming">Gaming theme</label>
+              <div class="input-pointer">xXx</div>
+            </div>
+            <div class="input-wrapper">
+              <input type="radio" id="theme-da" name="theme" value="da" />
+              <label for="theme-da">DA Projects theme</label>
+              <div class="input-pointer">xXx</div>
+            </div>
+            <div class="input-wrapper">
+              <input type="radio" id="theme-foods" name="theme" value="foods" />
+              <label for="theme-foods">Foods theme</label>
+              <div class="input-pointer">xXx</div>
+            </div>
+          </div>
+        </div>
+        <div class="choose-container">
+          <h4>Choose player</h4>
+          <div class="inputs-wrapper">
+            <div class="input-wrapper">
+              <input type="radio" id="player-blue" name="player" value="blue" checked />
+              <label for="player-blue">Blue</label>
+              <div class="input-pointer">xXx</div>
+            </div>
+            <div class="input-wrapper">
+              <input type="radio" id="player-orange" name="player" value="orange" />
+              <label for="player-orange">Orange</label>
+              <div class="input-pointer">xXx</div>
+            </div>
+          </div>
+        </div>
+        <div class="choose-container">
+          <h4>Board size</h4>
+          <div class="inputs-wrapper">
+            <div class="input-wrapper">
+              <input type="radio" id="size-16" name="size" value="4x4" checked />
+              <label for="size-16">16 cards</label>
+              <div class="input-pointer">xXx</div>
+            </div>
+            <div class="input-wrapper">
+              <input type="radio" id="size-24" name="size" value="6x6" />
+              <label for="size-24">24 cards</label>
+              <div class="input-pointer">xXx</div>
+            </div>
+            <div class="input-wrapper">
+              <input type="radio" id="size-36" name="size" value="8x8" />
+              <label for="size-36">36 cards</label>
+              <div class="input-pointer">xXx</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="preview-container">
+        <img
+          class="preview-image"
+          src="./src/assets/images/design-preview/code-theme-.png"
+          alt="Preview image"
+        />
+        <div class="preview-board"><button class="start-game-button">Start game</button></div>
+      </div>
+    </main>
+    <script type="module" src="./src/settings.ts"></script>
+  </body>
 </html>

@@ -1,0 +1,88 @@
+@use "../abstract/mixin";
+
+.settings-body {
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(48, 49, 49, 1);
+  font-family: "Almarai Regular";
+
+  @include mixin.flex-center(column);
+}
+
+.main-settings {
+  @include mixin.flex-start(row);
+  justify-content: space-between;
+  max-width: 1440px;
+  width: 100%;
+
+  padding: 243px 170px;
+
+  position: relative;
+
+  align-items: stretch;
+}
+
+.headline-subtitle {
+  font-family: "Red Rose";
+  font-size: 54px;
+
+  position: absolute;
+  margin-top: -129px;
+}
+
+.settings-left-container {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.choose-container {
+  @include mixin.flex-start(column);
+  width: 300px;
+  gap: 16px;
+}
+
+.inputs-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 12px;
+}
+
+.inputs-wrapper div {
+  display: flex;
+  gap: 16px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  & .input-pointer {
+    display: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    & .input-pointer {
+      display: block;
+    }
+  }
+
+  input,
+  label {
+    cursor: pointer;
+  }
+}
+
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  & img {
+    border-radius: 16px;
+  }
+}
