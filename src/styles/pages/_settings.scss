@@ -6,6 +6,8 @@
   font-family: "Almarai Regular";
 
   @include mixin.flex-center(column);
+  height: 100vh;
+  margin: 0;
 }
 
 .main-settings {
@@ -39,41 +41,81 @@
   @include mixin.flex-start(column);
   width: 300px;
   gap: 16px;
+
+  & h4 {
+    @include mixin.flex-center;
+    gap: 8px;
+
+    & .game-icon svg {
+      color: rgba(218, 30, 186, 1);
+    }
+
+    & .player-icon svg {
+      color: rgba(26, 229, 190, 1);
+    }
+
+    & .board-icon svg {
+      color: rgba(6, 53, 201, 1);
+    }
+  }
 }
 
 .inputs-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 12px;
+  @include mixin.flex-start(column);
   gap: 12px;
-}
-
-.inputs-wrapper div {
-  display: flex;
-  gap: 16px;
+  padding-left: 24px;
 }
 
 .input-wrapper {
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 
-  & .input-pointer {
-    display: none;
-  }
-
-  &:hover {
-    cursor: pointer;
-
-    & .input-pointer {
-      display: block;
-    }
-  }
-
-  input,
   label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: "Almarai Regular";
+    transition: font-family 0.2s ease;
+  }
+
+  &:hover label,
+  &:hover input {
+    font-family: "Almarai Bold";
     cursor: pointer;
   }
+
+  input:checked + label {
+    font-family: "Almarai Bold";
+  }
+}
+
+.label-line {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+
+  svg {
+    color: rgba(240, 234, 110, 1);
+    width: 41px;
+    height: 20px;
+  }
+}
+
+.input-wrapper:hover .label-line {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.input-wrapper input:checked + label .label-line {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .preview-container {
@@ -84,5 +126,62 @@
 
   & img {
     border-radius: 16px;
+    max-width: 360px;
+    width: 100%;
+  }
+}
+
+.preview-board {
+  @include mixin.flex-center(row);
+  gap: 16px;
+  padding: 14px 20px;
+
+  background-color: rgba(246, 246, 246, 1);
+}
+
+.start-game-button {
+  font-family: "Red Rose";
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(48, 49, 49, 1);
+
+  padding: 14px 20px;
+  background-color: rgba(240, 234, 110, 1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  span {
+    display: flex;
+  }
+
+  &:disabled {
+    color: rgba(163, 161, 161, 1);
+    background-color: rgba(219, 219, 214, 1);
+  }
+
+  &:hover:not(:disabled) {
+    transform: scale(1.2);
+
+    svg {
+      transform: rotate(-5deg);
+    }
+  }
+
+  & p {
+    text-align: center;
+  }
+}
+
+.board-seperator {
+  color: rgba(240, 234, 110, 1);
+
+  &-unchoosen {
+    background-color: rgba(240, 234, 110, 1);
+    width: 8px;
+    height: 56px;
+    transform: rotate(9deg);
   }
 }

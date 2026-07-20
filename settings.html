@@ -27,73 +27,69 @@
       <div class="settings-left-container">
         <h3 class="headline-subtitle">Settings</h3>
         <div class="choose-container">
-          <h4>Game themes</h4>
+          <h4><span class="game-icon" id="game-themes-symbol"></span>Game themes</h4>
           <div class="inputs-wrapper">
             <div class="input-wrapper">
               <input type="radio" id="theme-code" name="theme" value="code" checked />
-              <label for="theme-code">Code vibes theme</label>
-              <div class="input-pointer">xXx</div>
+              <label for="theme-code">Code vibes theme<span class="label-line"></span></label>
             </div>
             <div class="input-wrapper">
               <input type="radio" id="theme-gaming" name="theme" value="gaming" />
-              <label for="theme-gaming">Gaming theme</label>
-              <div class="input-pointer">xXx</div>
+              <label for="theme-gaming">Gaming theme<span class="label-line"></span></label>
             </div>
             <div class="input-wrapper">
               <input type="radio" id="theme-da" name="theme" value="da" />
-              <label for="theme-da">DA Projects theme</label>
-              <div class="input-pointer">xXx</div>
+              <label for="theme-da">DA Projects theme<span class="label-line"></span></label>
             </div>
             <div class="input-wrapper">
               <input type="radio" id="theme-foods" name="theme" value="foods" />
-              <label for="theme-foods">Foods theme</label>
-              <div class="input-pointer">xXx</div>
+              <label for="theme-foods">Foods theme<span class="label-line"></span></label>
             </div>
           </div>
         </div>
         <div class="choose-container">
-          <h4>Choose player</h4>
+          <h4><span class="player-icon" id="choose-player-symbol"></span>Choose player</h4>
           <div class="inputs-wrapper">
             <div class="input-wrapper">
-              <input type="radio" id="player-blue" name="player" value="blue" checked />
-              <label for="player-blue">Blue</label>
-              <div class="input-pointer">xXx</div>
+              <input type="radio" id="player-blue" name="player" value="blue" />
+              <label for="player-blue">Blue<span class="label-line"></span></label>
             </div>
             <div class="input-wrapper">
               <input type="radio" id="player-orange" name="player" value="orange" />
-              <label for="player-orange">Orange</label>
-              <div class="input-pointer">xXx</div>
+              <label for="player-orange">Orange<span class="label-line"></span></label>
             </div>
           </div>
         </div>
         <div class="choose-container">
-          <h4>Board size</h4>
+          <h4><span class="board-icon" id="board-size-symbol"></span>Board size</h4>
           <div class="inputs-wrapper">
             <div class="input-wrapper">
-              <input type="radio" id="size-16" name="size" value="4x4" checked />
-              <label for="size-16">16 cards</label>
-              <div class="input-pointer">xXx</div>
+              <input type="radio" id="size-16" name="size" value="4x4" />
+              <label for="size-16">16 cards<span class="label-line"></span></label>
             </div>
             <div class="input-wrapper">
-              <input type="radio" id="size-24" name="size" value="6x6" />
-              <label for="size-24">24 cards</label>
-              <div class="input-pointer">xXx</div>
+              <input type="radio" id="size-24" name="size" value="4x6" />
+              <label for="size-24">24 cards<span class="label-line"></span></label>
             </div>
             <div class="input-wrapper">
-              <input type="radio" id="size-36" name="size" value="8x8" />
-              <label for="size-36">36 cards</label>
-              <div class="input-pointer">xXx</div>
+              <input type="radio" id="size-36" name="size" value="6x6" />
+              <label for="size-36">36 cards<span class="label-line"></span></label>
             </div>
           </div>
         </div>
       </div>
       <div class="preview-container">
-        <img
-          class="preview-image"
-          src="./src/assets/images/design-preview/code-theme-.png"
-          alt="Preview image"
-        />
-        <div class="preview-board"><button class="start-game-button">Start game</button></div>
+        <img class="preview-image" id="preview-image" alt="Preview image" />
+        <div class="preview-board">
+          <div id="theme-preview">Game theme</div>
+          <div class="board-seperator"></div>
+          <div id="player-preview">Player</div>
+          <div class="board-seperator"></div>
+          <div id="size-preview">Board size</div>
+          <button id="start-game-button" class="start-game-button" disabled>
+            <span id="start-game-button-text"></span>Start game
+          </button>
+        </div>
       </div>
     </main>
     <script type="module" src="./src/settings.ts"></script>
