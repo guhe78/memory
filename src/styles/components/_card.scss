@@ -25,9 +25,10 @@
     border-radius: 20px;
 
     &--back {
-      background-color: black;
-      background-image: url("../../assets/themes/card-icon-back/da_logo.png");
-      background-size: 50px auto;
+      background-image:
+        url("../../assets/themes/card-icon-back/da_logo.png"),
+        linear-gradient(212.26deg, #4dd5bc 29.42%, #286f62 123.94%);
+      background-size: 49px, cover;
       background-position: center;
       background-repeat: no-repeat;
     }
