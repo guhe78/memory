@@ -113,7 +113,7 @@ function addSymbols() {
   const boardSizeSubheading = document.getElementById("board-size-symbol") as HTMLSpanElement;
   const startGameButton = document.getElementById("start-game-button-text") as HTMLSpanElement;
 
-  headlineUnderline.innerHTML = uiIcons.headlineUnderline(25);
+  headlineUnderline.innerHTML = uiIcons.headlineUnderline();
   gameSubheading.innerHTML = uiIcons.palette(20);
   playerSubheading.innerHTML = uiIcons.chessFigure(20);
   boardSizeSubheading.innerHTML = uiIcons.board(20);

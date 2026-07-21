@@ -19,10 +19,20 @@
   &__face {
     position: absolute;
     inset: 0;
-    background-color: black;
+    color: rebeccapurple;
     backface-visibility: hidden;
 
+    border-radius: 20px;
+
     &--back {
+      background-color: black;
+      background-image: url("../../assets/themes/card-icon-back/da_logo.png");
+      background-size: 50px auto;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    &--front {
       transform: rotateY(180deg);
       background-color: red;
       color: white;
