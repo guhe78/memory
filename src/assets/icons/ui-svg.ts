@@ -24,14 +24,20 @@ export const uiIcons = {
   `,
 
   seperatorUnchoosen: (size = 32) => `
-    <svg width="${size}" height="${size}" viewBox="0 0 27 56" xmlns="http://www.w3.org/2000/svg">
+    <svg width="${size}" viewBox="0 0 27 56" xmlns="http://www.w3.org/2000/svg">
       <line x1="22.3153" y1="1.32435" x2="3.7744" y2="54.166" stroke="currentColor" stroke-width="8"/>
     </svg>
   `,
 
   seperatorChoosen: (size = 32) => `
-    <svg width="${size}" height="${size}" viewBox="0 0 37 60" xmlns="http://www.w3.org/2000/svg">
+    <svg width="${size}" viewBox="0 0 37 60" xmlns="http://www.w3.org/2000/svg">
       <path d="M5.16399 59.2224L20.6559 54.0584L15.4919 38.5665L1.46235e-05 43.7304L5.16399 59.2224ZM34.328 0.894409L32.5391 -1.81198e-05L8.53912 48L10.328 48.8944L12.1168 49.7888L36.1168 1.78884L34.328 0.894409Z" fill="currentColor"/>
+    </svg>
+  `,
+
+  headlineUnderline: () => `
+    <svg viewBox="0 0 263 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-0.000152588 11.547L11.5469 23.094L23.0939 11.547L11.5469 -8.58307e-06L-0.000152588 11.547ZM262.547 11.547V9.547L11.5469 9.547V11.547V13.547L262.547 13.547V11.547Z" fill="currentColor"/>
     </svg>
   `,
 

@@ -27,6 +27,16 @@
   font-family: "Red Rose";
   font-size: 54px;
 
+  position: relative;
+}
+
+.headline-underline {
+  position: absolute;
+  bottom: -17px;
+  left: -20px;
+}
+
+.headline-container {
   position: absolute;
   margin-top: -129px;
 }
@@ -137,6 +147,13 @@
   padding: 14px 20px;
 
   background-color: rgba(246, 246, 246, 1);
+
+  &__item {
+    @include mixin.flex-center(row);
+
+    width: 130px;
+    height: 24px;
+  }
 }
 
 .start-game-button {
@@ -180,8 +197,12 @@
 
   &-unchoosen {
     background-color: rgba(240, 234, 110, 1);
-    width: 8px;
-    height: 56px;
     transform: rotate(9deg);
   }
+}
+
+.headline-underline {
+  width: 251px;
+  height: auto;
+  color: rgba(240, 234, 110, 1);
 }

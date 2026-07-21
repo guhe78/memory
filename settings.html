@@ -25,7 +25,10 @@
   <body class="settings-body">
     <main class="main-settings">
       <div class="settings-left-container">
-        <h3 class="headline-subtitle">Settings</h3>
+        <div class="headline-container">
+          <h3 class="headline-subtitle">Settings</h3>
+          <div class="headline-underline" id="headline-underline"></div>
+        </div>
         <div class="choose-container">
           <h4><span class="game-icon" id="game-themes-symbol"></span>Game themes</h4>
           <div class="inputs-wrapper">
@@ -81,11 +84,11 @@
       <div class="preview-container">
         <img class="preview-image" id="preview-image" alt="Preview image" />
         <div class="preview-board">
-          <div id="theme-preview">Game theme</div>
+          <div class="preview-board__item" id="theme-preview">Game theme</div>
           <div class="board-seperator"></div>
-          <div id="player-preview">Player</div>
+          <div class="preview-board__item" id="player-preview">Player</div>
           <div class="board-seperator"></div>
-          <div id="size-preview">Board size</div>
+          <div class="preview-board__item" id="size-preview">Board size</div>
           <button id="start-game-button" class="start-game-button" disabled>
             <span id="start-game-button-text"></span>Start game
           </button>

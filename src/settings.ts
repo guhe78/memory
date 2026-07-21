@@ -28,7 +28,7 @@ function initSettings() {
   setSelectedThemePreview();
   syncPreviewBoardText();
   addInputListener();
-  addSubheadingSymbols();
+  addSymbols();
 }
 
 function getCheckedInput(group: GroupName) {
@@ -64,14 +64,14 @@ function syncPreviewBoardText() {
 
   if (boardSeparators[0]) {
     boardSeparators[0].innerHTML = playerSelected
-      ? uiIcons.seperatorChoosen(56)
-      : uiIcons.seperatorUnchoosen(56);
+      ? uiIcons.seperatorChoosen(32)
+      : uiIcons.seperatorUnchoosen(32);
   }
 
   if (boardSeparators[1]) {
     boardSeparators[1].innerHTML = sizeSelected
-      ? uiIcons.seperatorChoosen(56)
-      : uiIcons.seperatorUnchoosen(56);
+      ? uiIcons.seperatorChoosen(32)
+      : uiIcons.seperatorUnchoosen(32);
   }
 
   if (playerSelected && sizeSelected) startGameButton.disabled = false;
@@ -106,12 +106,14 @@ function addInputListener() {
     });
 }
 
-function addSubheadingSymbols() {
+function addSymbols() {
+  const headlineUnderline = document.getElementById("headline-underline") as HTMLDivElement;
   const gameSubheading = document.getElementById("game-themes-symbol") as HTMLSpanElement;
   const playerSubheading = document.getElementById("choose-player-symbol") as HTMLSpanElement;
   const boardSizeSubheading = document.getElementById("board-size-symbol") as HTMLSpanElement;
   const startGameButton = document.getElementById("start-game-button-text") as HTMLSpanElement;
 
+  headlineUnderline.innerHTML = uiIcons.headlineUnderline(25);
   gameSubheading.innerHTML = uiIcons.palette(20);
   playerSubheading.innerHTML = uiIcons.chessFigure(20);
   boardSizeSubheading.innerHTML = uiIcons.board(20);
