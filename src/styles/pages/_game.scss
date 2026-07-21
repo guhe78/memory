@@ -1,0 +1,22 @@
+@use "../abstract/mixin";
+@use "../abstract/themes";
+
+.code-theme {
+  @include mixin.make-theme(map-get(themes.$code-vibes));
+}
+
+.da-theme {
+  @include mixin.make-theme(map-get(themes.$da-projects));
+}
+
+.gaming-theme {
+  @include mixin.make-theme(map-get(themes.$gaming));
+}
+
+.foods-theme {
+  @include mixin.make-theme(map-get(themes.$foods));
+}
+
+.game-body {
+  background-color: var(--background-color);
+}

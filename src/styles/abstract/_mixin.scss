@@ -20,12 +20,8 @@
   flex-direction: $direction;
 }
 
-@mixin theming($themes-map: $themes) {
-  @each $theme-name, $theme-map in $themes-map {
-    .theme-#{$theme-name} & {
-      @each $key, $value in $theme-map {
-        --#{$key}: #{$value};
-      }
-    }
+@mixin make-theme($theme-map) {
+  @each $key, $value in $theme-map {
+    --#{$key}: #{$value};
   }
 }
