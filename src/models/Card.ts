@@ -1,4 +1,6 @@
-function init() {
+import "../styles/components/_card.scss";
+
+export function initCards(count: number) {
   const fieldRef = document.getElementById("field");
   if (fieldRef) {
     fieldRef.addEventListener("click", (e) => {
@@ -10,13 +12,13 @@ function init() {
     });
   }
 
-  setCards();
+  setCards(count);
 }
 
-function setCards() {
+function setCards(count: number) {
   const field = document.getElementById("field");
 
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < count; i++) {
     if (field) {
       field.innerHTML += cardTemplate();
     }
@@ -24,5 +26,11 @@ function setCards() {
 }
 
 function cardTemplate() {
-  return '<button class="card"><div class="card__inner"><div class="card__face"></div><div class="card__face card__face--back">a</div></div></button>';
+  return `
+    <button class="card">
+      <div class="card__inner">
+        <div class="card__face card__face--back"></div>
+        <div class="card__face card__face--front">a</div>
+      </div>
+    </button>`;
 }
