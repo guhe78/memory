@@ -29,6 +29,7 @@ function initSettings() {
   syncPreviewBoardText();
   addInputListener();
   addSymbols();
+  startGameListener();
 }
 
 function getCheckedInput(group: GroupName) {
@@ -104,6 +105,16 @@ function addInputListener() {
     .forEach((input) => {
       input.addEventListener("change", syncPreviewBoardText);
     });
+}
+
+function startGameListener() {
+  startGameButton.addEventListener("click", () => {
+    const theme = getCheckedInput("theme")?.value ?? "code";
+    const player = getCheckedInput("player")?.value ?? "blue";
+    const size = getCheckedInput("size")?.value ?? "16";
+
+    window.location.href = "/game.html?theme=" + theme + "&player=" + player + "&size=" + size;
+  });
 }
 
 function addSymbols() {

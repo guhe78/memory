@@ -1,22 +1,97 @@
 @use "../abstract/mixin";
 @use "../abstract/themes";
 
+@use "sass:map";
+
 .code-theme {
-  @include mixin.make-theme(map-get(themes.$code-vibes));
+  @include mixin.make-theme(map.get(themes.$themes, code-vibes));
 }
 
 .da-theme {
-  @include mixin.make-theme(map-get(themes.$da-projects));
+  @include mixin.make-theme(map.get(themes.$themes, da-projects));
 }
 
 .gaming-theme {
-  @include mixin.make-theme(map-get(themes.$gaming));
+  @include mixin.make-theme(map.get(themes.$themes, gaming));
 }
 
 .foods-theme {
-  @include mixin.make-theme(map-get(themes.$foods));
+  @include mixin.make-theme(map.get(themes.$themes, foods));
 }
 
 .game-body {
   background-color: var(--background-color);
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
+
+.main-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 54px;
+  padding: 41px 112px;
+  max-width: 1440px;
+  width: 100%;
+  max-height: 1024px;
+  height: 100%;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  gap: 20px;
+}
+
+.game-board-head {
+  @include mixin.flex-between(row);
+  gap: 20px;
+  width: 100%;
+  background-color: var(--board-header-background-color);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: var(--board-header-box-shadow);
+}
+
+.score-board {
+  @include mixin.flex-center(row);
+  gap: 20px;
+  padding: 17px 20px;
+  background-color: var(--scoreboard-background-color);
+  border-radius: 10px;
+  box-shadow: var(--scoreboard-box-shadow);
+}
+
+.button-exit {
+  background-color: var(--exit-button-color);
+  border: 1px solid var(--exit-button-border-color);
+  border-radius: var(--exit-button-border-radius);
+  padding: 10px 20px;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: var(--exit-button-hover-color);
+    color: var(--exit-button-hover-text-color);
+    cursor: pointer;
+  }
+}
+
+.button-popup-exit {
+  background-color: var(--popup-button-color);
+  border: 1px solid var(--popup-button-border-color);
+  border-radius: var(--popup-button-border-radius);
+  padding: 10px 20px;
+  color: var(--popup-button-text-color);
+  font-family: var(--font-family);
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: var(--popup-button-hover-color);
+    color: var(--popup-button-hover-text-color);
+    cursor: pointer;
+  }
 }
