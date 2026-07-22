@@ -26,13 +26,22 @@
     <main class="main-game">
       <header class="game-board-head">
         <div class="score-board">
-          <div class="player-one">Blue</div>
-          <div class="player-two">Orange</div>
+          <div class="player-one"><span id="player-symbol-blue">Blue</span> <span>4</span></div>
+          <div class="player-two"><span id="player-symbol-orange">Orange</span> <span>3</span></div>
         </div>
-        <div class="current-player"></div>
-        <button class="button-exit">Exit game</button>
+        <div class="current-player">Current Player: <span id="current-player">Blue</span></div>
+        <button class="button-exit" id="exit-button">Exit game</button>
       </header>
-      <div id="field"></div>
+      <div class="game-board" id="field"></div>
+      <dialog id="exit-dialog">
+        <div class="exit-dialog-content">
+          <h3>Are you sure you want to quit the game?</h3>
+          <div class="exit-dialog-buttons">
+            <button class="button-popup-exit" id="exit-yes">Yes</button>
+            <button class="button-popup-exit" id="exit-no">No</button>
+          </div>
+        </div>
+      </dialog>
     </main>
     <script type="module" src="./src/game.ts"></script>
   </body>

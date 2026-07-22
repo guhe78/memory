@@ -3,8 +3,8 @@
 }
 
 .card {
-  height: 100px;
-  aspect-ratio: 1/1;
+  width: var(--card-width);
+  height: var(--card-height);
   background-color: transparent;
   border: none;
 
@@ -19,15 +19,14 @@
   &__face {
     position: absolute;
     inset: 0;
-    color: rebeccapurple;
     backface-visibility: hidden;
-
-    border-radius: 20px;
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-box-shadow);
 
     &--back {
+      background-color: var(--card-back-color);
       background-image:
-        url("../../assets/themes/card-icon-back/da_logo.png"),
-        linear-gradient(212.26deg, #4dd5bc 29.42%, #286f62 123.94%);
+        url("../../assets/themes/card-icon-back/da_logo.png"), var(--card-back-gradient);
       background-size: 49px, cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -35,8 +34,7 @@
 
     &--front {
       transform: rotateY(180deg);
-      background-color: red;
-      color: white;
+      background-color: var(--card-front-color);
 
       display: flex;
       justify-content: center;
