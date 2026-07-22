@@ -62,36 +62,104 @@
   box-shadow: var(--scoreboard-box-shadow);
 }
 
+.player-one,
+.player-two {
+  font-weight: 700;
+  font-size: 24px;
+
+  & svg {
+    width: var(--player-symbol-width);
+    height: auto;
+  }
+}
+
+.player-one,
+.player-two {
+  & svg {
+    width: var(--player-symbol-width);
+    height: auto;
+  }
+}
+
+.current-player {
+  font-size: var(--current-player-font-size);
+  font-weight: var(--current-player-font-weight);
+  & svg {
+    width: var(--current-player-symbol-width);
+    height: auto;
+  }
+}
+
+.player-blue {
+  color: rgba(43, 177, 255, 1);
+}
+
+.player-orange {
+  color: rgba(245, 142, 57, 1);
+}
+
 .button-exit {
+  @include mixin.flex-center(row);
+  gap: 8px;
   background-color: var(--exit-button-color);
-  border: 1px solid var(--exit-button-border-color);
-  border-radius: var(--exit-button-border-radius);
+  border: var(--button-border);
+  border-radius: var(--button-border-radius);
   padding: 10px 20px;
   color: var(--text-color);
   font-family: var(--font-family);
-  font-size: 16px;
-  transition: all 0.3s ease-in-out;
+  font-size: var(--exit-button-font-size);
+  font-weight: var(--exit-button-font-weight);
+
+  & svg {
+    width: var(--exit-button-symbol-width);
+    height: auto;
+    color: var(--exit-button-symbol-color);
+  }
 
   &:hover {
     background-color: var(--exit-button-hover-color);
     color: var(--exit-button-hover-text-color);
+    border: var(--button-border-hover);
+    box-shadow: var(--button-shadow-hover);
     cursor: pointer;
+
+    & svg {
+      color: var(--exit-button-hover-symbol-color);
+    }
   }
 }
 
 .button-popup-exit {
   background-color: var(--popup-button-color);
   border: 1px solid var(--popup-button-border-color);
-  border-radius: var(--popup-button-border-radius);
+  border-radius: var(--button-border-radius);
   padding: 10px 20px;
   color: var(--popup-button-text-color);
   font-family: var(--font-family);
   font-size: 16px;
-  transition: all 0.3s ease-in-out;
 
   &:hover {
     background-color: var(--popup-button-hover-color);
     color: var(--popup-button-hover-text-color);
     cursor: pointer;
   }
+}
+
+.exit-dialog-content {
+  @include mixin.flex-center(column);
+  gap: 40px;
+  padding: 40px;
+  background-color: var(--popup-dialog-background-color);
+  border-radius: var(--dialog-border-radius);
+  box-shadow: var(--popup-dialog-box-shadow);
+}
+
+.exit-dialog-buttons {
+  @include mixin.flex-center(row);
+  gap: 20px;
+}
+
+.extra-font {
+  font-family: "Delius Unicase";
+  font-weight: 700;
 }

@@ -3,7 +3,8 @@
 .settings-body {
   background-color: rgba(255, 255, 255, 1);
   color: rgba(48, 49, 49, 1);
-  font-family: "Almarai Regular";
+  font-family: "Almarai";
+  font-weight: 400;
 
   @include mixin.flex-center(column);
   height: 100vh;
@@ -87,18 +88,21 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    font-family: "Almarai Regular";
+    font-family: "Almarai";
+    font-weight: 400;
     transition: font-family 0.2s ease;
   }
 
   &:hover label,
   &:hover input {
-    font-family: "Almarai Bold";
+    font-family: "Almarai";
+    font-weight: 700;
     cursor: pointer;
   }
 
   input:checked + label {
-    font-family: "Almarai Bold";
+    font-family: "Almarai";
+    font-weight: 700;
   }
 }
 
