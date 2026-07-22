@@ -25,6 +25,7 @@ a {
 }
 
 button {
+  white-space: nowrap;
   border: none;
   &:hover {
     cursor: pointer;

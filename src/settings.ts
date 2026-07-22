@@ -10,10 +10,10 @@ const startGameButton = document.getElementById("start-game-button") as HTMLButt
 const boardSeparators = document.querySelectorAll<HTMLDivElement>(".board-seperator");
 
 const previews = {
-  code: new URL("./assets/images/design-preview/code-theme.png", import.meta.url).href,
-  gaming: new URL("./assets/images/design-preview/gaming-theme.png", import.meta.url).href,
-  da: new URL("./assets/images/design-preview/da-theme.png", import.meta.url).href,
-  foods: new URL("./assets/images/design-preview/food-theme.png", import.meta.url).href,
+  code: new URL("./assets/themes/design-preview/code-theme.png", import.meta.url).href,
+  gaming: new URL("./assets/themes/design-preview/gaming-theme.png", import.meta.url).href,
+  da: new URL("./assets/themes/design-preview/da-theme.png", import.meta.url).href,
+  foods: new URL("./assets/themes/design-preview/food-theme.png", import.meta.url).href,
 } as const;
 
 type ThemeKey = keyof typeof previews;
