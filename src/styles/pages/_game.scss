@@ -100,15 +100,18 @@
 
 .button-exit {
   @include mixin.flex-center(row);
-  gap: 8px;
   background-color: var(--exit-button-color);
   border: var(--button-border);
   border-radius: var(--button-border-radius);
   padding: 10px 20px;
-  color: var(--text-color);
+  gap: 8px;
+  color: var(--exit-button-text-color);
   font-family: var(--font-family);
   font-size: var(--exit-button-font-size);
   font-weight: var(--exit-button-font-weight);
+
+  position: relative;
+  overflow: hidden;
 
   & svg {
     width: var(--exit-button-symbol-width);
@@ -126,22 +129,102 @@
     & svg {
       color: var(--exit-button-hover-symbol-color);
     }
+
+    & .exit-button-foods-border {
+      position: absolute;
+      inset: 0;
+
+      & svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: var(--button-border-color);
+      }
+    }
   }
 }
 
 .button-popup-exit {
-  background-color: var(--popup-button-color);
-  border: 1px solid var(--popup-button-border-color);
   border-radius: var(--button-border-radius);
   padding: 10px 20px;
   color: var(--popup-button-text-color);
   font-family: var(--font-family);
   font-size: 16px;
 
-  &:hover {
-    background-color: var(--popup-button-hover-color);
-    color: var(--popup-button-hover-text-color);
-    cursor: pointer;
+  &__no {
+    background-color: var(--popup-no-button-background-color);
+    border: var(--popup-no-button-border);
+    color: var(--popup-no-button-text-color);
+    box-shadow: var(--popup-no-button-shadow);
+
+    position: relative;
+    overflow: hidden;
+
+    & .no-button-icon {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+
+      & svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: var(--button-border-color);
+      }
+    }
+
+    &:hover {
+      background-color: var(--popup-no-button-hover-background-color);
+      border: var(--popup-no-button-hover-border);
+      color: var(--popup-no-button-hover-text-color);
+      box-shadow: var(--popup-no-button-hover-shadow);
+
+      & .no-button-icon {
+        display: none;
+      }
+    }
+  }
+
+  &__yes {
+    background-color: var(--popup-yes-button-background-color);
+    border: var(--popup-yes-button-border);
+    color: var(--popup-yes-button-text-color);
+    box-shadow: var(--popup-yes-button-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    position: relative;
+    overflow: hidden;
+
+    & .yes-button-icon {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+
+      & svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        color: var(--button-border-color);
+      }
+    }
+
+    &:hover {
+      background-color: var(--popup-yes-button-hover-background-color);
+      border: var(--popup-yes-button-hover-border);
+      color: var(--popup-yes-button-hover-text-color);
+      box-shadow: var(--popup-yes-button-hover-shadow);
+
+      & .yes-button-icon {
+        display: none;
+      }
+    }
   }
 }
 
@@ -162,4 +245,20 @@
 .extra-font {
   font-family: "Delius Unicase";
   font-weight: 700;
+  font-size: 16px;
+}
+
+.exit-button-foods-border {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  & svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: var(--exit-button-svg-border-color);
+  }
 }

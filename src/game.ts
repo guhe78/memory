@@ -2,6 +2,7 @@ import "./styles/game.scss";
 import * as card from "../src/models/Card";
 import { Dialog } from "./models/Dialog";
 import { uiIcons } from "./assets/icons/ui-svg";
+import { uiButtonsFoods } from "./assets/icons/ui-foods-svg";
 
 const params = new URLSearchParams(window.location.search);
 
@@ -41,8 +42,11 @@ function initExitDialog() {
   const exitYesButton = document.getElementById("exit-yes");
   const exitNoButton = document.getElementById("exit-no");
 
-  exitButton.innerHTML = uiIcons.exit() + "Exit game";
-
+  if (params.get("theme") === "foods") {
+    exitButton.innerHTML = `<span class="exit-button-foods-border">${uiButtonsFoods.exitButtonHeader()}</span> ${uiIcons.exit()} Exit game`;
+  } else {
+    exitButton.innerHTML = `${uiIcons.exit()} Exit game`;
+  }
   exitButton.addEventListener("click", () => {
     dialog.open();
   });
@@ -102,8 +106,14 @@ function setExitPopUpButtons() {
     noButton.innerText = "No, back to game";
     yesButton.innerText = "Yes, quit game";
   } else if (theme === "foods") {
-    noButton.innerText = "No, back to game";
-    yesButton.innerText = "Exit game";
+    noButton.innerHTML = `
+      <span class="no-button-icon">
+        ${uiButtonsFoods.backButtonPopup()}
+      </span>No, back to game`;
+    yesButton.innerHTML = `
+      <span class="yes-button-icon">
+        ${uiButtonsFoods.exitButtonPopup()}
+      </span>Exit game`;
     noButton.classList.add("extra-font");
     yesButton.classList.add("extra-font");
     exitButton.classList.add("extra-font");
