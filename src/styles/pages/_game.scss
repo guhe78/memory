@@ -82,20 +82,47 @@
 }
 
 .current-player {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  gap: 8px;
+
   font-size: var(--current-player-font-size);
   font-weight: var(--current-player-font-weight);
+
+  &__symbol-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--current-player-width);
+    height: var(--current-player-height);
+    border-radius: var(--current-player-border-radius);
+  }
   & svg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: var(--current-player-symbol-width);
     height: auto;
+    color: var(--current-player-symbol-color);
   }
 }
 
 .player-blue {
   color: rgba(43, 177, 255, 1);
+
+  &__background {
+    background-color: rgba(43, 177, 255, 1);
+  }
 }
 
 .player-orange {
   color: rgba(245, 142, 57, 1);
+
+  &__background {
+    background-color: rgba(245, 142, 57, 1);
+  }
 }
 
 .button-exit {

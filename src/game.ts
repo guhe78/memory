@@ -2,23 +2,22 @@ import "./styles/game.scss";
 
 import { uiIcons } from "./assets/icons/ui-svg";
 import { uiButtonsFoods } from "./assets/icons/ui-foods-svg";
-import { Game, Dialog } from "./models";
+import { Game, Dialog, type GameState } from "./models";
 import { ThemeName } from "./themes";
 
 const params = new URLSearchParams(window.location.search);
+const theme = (params.get("theme") || "code") as ThemeName;
 
 initGamePage();
 
 function initGamePage() {
-  const theme = (params.get("theme") || "code") as ThemeName;
-
   setGameBoard(theme, Number(params.get("size")) ?? 16, params.get("player") ?? "blue");
   initExitDialog();
   setHeaderTheme();
   setExitPopUpButtons();
 }
 
-export function setGameBoard(theme: ThemeName, cards: number, player: string) {
+function setGameBoard(theme: ThemeName, cards: number, player: string) {
   const themeClassMap: Record<ThemeName, string> = {
     code: "code-theme",
     da: "da-theme",
@@ -31,9 +30,48 @@ export function setGameBoard(theme: ThemeName, cards: number, player: string) {
 
   const gameBoard = document.getElementById("field") as HTMLDivElement;
   gameBoard.style.setProperty("--columns", cards === 16 ? "4" : "6");
+  const firstPlayerName = player === "blue" ? "Blue" : "Orange";
+  const secondPlayerName = player === "blue" ? "Orange" : "Blue";
 
-  const game = new Game(gameBoard, cards, theme);
+  const game = new Game(
+    gameBoard,
+    cards,
+    theme,
+    [firstPlayerName, secondPlayerName],
+    updateScoreboard,
+  );
+
   game.start();
+}
+
+function updateScoreboard(state: GameState) {
+  const playerOneScore = document.getElementById("player-one-score") as HTMLSpanElement;
+  const playerTwoScore = document.getElementById("player-two-score") as HTMLSpanElement;
+
+  playerOneScore.innerText = String(state.scores[0]);
+  playerTwoScore.innerText = String(state.scores[1]);
+
+  const playerOne = document.getElementById("player-one") as HTMLDivElement;
+  const playerTwo = document.getElementById("player-two") as HTMLDivElement;
+
+  playerOne.classList.toggle("is-current", state.currentPlayer === 0);
+  playerTwo.classList.toggle("is-current", state.currentPlayer === 1);
+
+  const currentPlayerElement = state.currentPlayer === 0 ? playerOne : playerTwo;
+  updateCurrentPlayerColor(currentPlayerElement);
+}
+
+function updateCurrentPlayerColor(currentPlayerElement: HTMLDivElement) {
+  const currentPlayerColor = document.getElementById("current-player-symbol") as HTMLSpanElement;
+  const isBlue = currentPlayerElement.classList.contains("player-blue");
+
+  if (theme === "code") {
+    currentPlayerColor.classList.toggle("player-blue", isBlue);
+    currentPlayerColor.classList.toggle("player-orange", !isBlue);
+  } else {
+    currentPlayerColor.classList.toggle("player-blue__background", isBlue);
+    currentPlayerColor.classList.toggle("player-orange__background", !isBlue);
+  }
 }
 
 function initExitDialog() {
