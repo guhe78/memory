@@ -3,23 +3,74 @@ import { Deck } from "./Deck";
 import { ThemeName } from "../themes";
 import { Player } from "./Player";
 
+export type GameState = {
+  scores: [number, number];
+  currentPlayer: 0 | 1;
+};
+
+type GameStateListener = (state: GameState) => void;
+
 export class Game {
   private readonly deck: Deck;
   private readonly field: HTMLDivElement;
   private flippedCards: Card[] = [];
   private isLocked = false;
   private players: Player[];
-  private currentPlayer = 0;
+  private currentPlayer: 0 | 1 = 0;
+  private readonly onStateChange?: GameStateListener;
 
-  constructor(field: HTMLDivElement, size: number, theme: ThemeName) {
+  constructor(
+    field: HTMLDivElement,
+    size: number,
+    theme: ThemeName,
+    playerNames: [string, string] = ["Blue", "Orange"],
+    onStateChange?: GameStateListener,
+  ) {
     this.field = field;
     this.deck = new Deck(field, size, theme);
-    this.players = [new Player("Blue"), new Player("Red")];
+    this.players = [new Player(playerNames[0]), new Player(playerNames[1])];
+    this.onStateChange = onStateChange;
   }
 
   public start(): void {
     this.deck.create();
     this.handleCardClick();
+    this.sendStateUpdate();
+  }
+
+  private sendStateUpdate(): void {
+    this.onStateChange?.({
+      scores: [this.players[0].getScore(), this.players[1].getScore()],
+      currentPlayer: this.currentPlayer,
+    });
+  }
+
+  private checkMatch(): void {
+    const [firstCard, secondCard] = this.flippedCards;
+
+    if (firstCard.symbol === secondCard.symbol) {
+      firstCard.match();
+      secondCard.match();
+      this.players[this.currentPlayer].addPoint();
+      this.flippedCards = [];
+      this.sendStateUpdate();
+      this.gameOver();
+      return;
+    }
+
+    this.nextTurn();
+  }
+
+  private nextTurn(): void {
+    this.isLocked = true;
+
+    window.setTimeout(() => {
+      this.flippedCards.forEach((card) => card.unflip());
+      this.flippedCards = [];
+      this.isLocked = false;
+      this.currentPlayer = this.currentPlayer === 0 ? 1 : 0;
+      this.sendStateUpdate();
+    }, 800);
   }
 
   private handleCardClick(): void {
@@ -41,33 +92,6 @@ export class Game {
         this.checkMatch();
       }
     });
-  }
-
-  private checkMatch(): void {
-    const [firstCard, secondCard] = this.flippedCards;
-
-    if (firstCard.symbol === secondCard.symbol) {
-      firstCard.match();
-      secondCard.match();
-      this.players[this.currentPlayer].addPoint();
-      this.flippedCards = [];
-      this.gameOver();
-      return;
-    }
-
-    this.nextTurn();
-  }
-
-  private nextTurn(): void {
-    this.isLocked = true;
-
-    window.setTimeout(() => {
-      this.flippedCards.forEach((card) => card.unflip());
-      this.flippedCards = [];
-      this.isLocked = false;
-
-      this.currentPlayer = this.currentPlayer === 0 ? 1 : 0;
-    }, 800);
   }
 
   private gameOver(): void {

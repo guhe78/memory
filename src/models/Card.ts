@@ -17,11 +17,9 @@ export class Card {
     this.symbol = symbol;
     this.element = this.createElement();
     this.frontFace = this.element.querySelector(".card__face--front") as HTMLDivElement;
-    // this.frontFace.textContent = symbol;
     this.imageIcon = this.element.querySelector(".card-symbol") as HTMLImageElement;
     this.imageIcon.src = symbol;
     this.imageIcon.alt = "";
-    console.log(symbol);
   }
 
   private createElement(): HTMLButtonElement {

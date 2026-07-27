@@ -4,3 +4,4 @@ export { Card } from "./Card";
 export { Game } from "./Game";
 export { Player } from "./Player";
 export type { Theme } from "./Theme";
+export type { GameState } from "./Game";
