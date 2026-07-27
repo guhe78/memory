@@ -1,26 +1,25 @@
 import "./styles/game.scss";
-import * as card from "../src/models/Card";
-import { Dialog } from "./models/Dialog";
+
 import { uiIcons } from "./assets/icons/ui-svg";
 import { uiButtonsFoods } from "./assets/icons/ui-foods-svg";
+import { Game, Dialog } from "./models";
+import { ThemeName } from "./themes";
 
 const params = new URLSearchParams(window.location.search);
 
 initGamePage();
 
 function initGamePage() {
-  setGameBoard(
-    params.get("theme") ?? "code",
-    Number(params.get("size")) ?? 16,
-    params.get("player") ?? "blue",
-  );
+  const theme = (params.get("theme") || "code") as ThemeName;
+
+  setGameBoard(theme, Number(params.get("size")) ?? 16, params.get("player") ?? "blue");
   initExitDialog();
   setHeaderTheme();
   setExitPopUpButtons();
 }
 
-export function setGameBoard(theme: string, cards: number, player: string) {
-  const themeClassMap: Record<string, string> = {
+export function setGameBoard(theme: ThemeName, cards: number, player: string) {
+  const themeClassMap: Record<ThemeName, string> = {
     code: "code-theme",
     da: "da-theme",
     gaming: "gaming-theme",
@@ -33,7 +32,8 @@ export function setGameBoard(theme: string, cards: number, player: string) {
   const gameBoard = document.getElementById("field") as HTMLDivElement;
   gameBoard.style.setProperty("--columns", cards === 16 ? "4" : "6");
 
-  card.initCards(cards);
+  const game = new Game(gameBoard, cards, theme);
+  game.start();
 }
 
 function initExitDialog() {
