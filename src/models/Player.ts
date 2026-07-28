@@ -11,4 +11,8 @@ export class Player {
   public getScore(): number {
     return this.score;
   }
+
+  public getName(): string {
+    return this.name;
+  }
 }

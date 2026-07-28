@@ -13,6 +13,7 @@ type GameStateListener = (state: GameState) => void;
 export class Game {
   private readonly deck: Deck;
   private readonly field: HTMLDivElement;
+  private readonly theme: ThemeName;
   private flippedCards: Card[] = [];
   private isLocked = false;
   private players: Player[];
@@ -27,6 +28,7 @@ export class Game {
     onStateChange?: GameStateListener,
   ) {
     this.field = field;
+    this.theme = theme;
     this.deck = new Deck(field, size, theme);
     this.players = [new Player(playerNames[0]), new Player(playerNames[1])];
     this.onStateChange = onStateChange;
@@ -97,8 +99,19 @@ export class Game {
   private gameOver(): void {
     const allMatched = this.deck.getCards().every((card) => card.matched);
 
+    console.log("gameover");
     if (!allMatched) return;
 
-    console.log("gameover");
+    const params = new URLSearchParams({
+      theme: this.theme,
+      playerone: this.players[0].getName(),
+      playertwo: this.players[1].getName(),
+      scoreone: this.players[0].getScore().toString(),
+      scoretwo: this.players[1].getScore().toString(),
+    });
+
+    setTimeout(() => {
+      window.location.href = `/gameover.html?${params.toString()}`;
+    }, 3000);
   }
 }

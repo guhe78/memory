@@ -8,6 +8,7 @@ import labyrinth from "../assets/themes/gaming/card-front-icons/labyrinth.png";
 import levelup from "../assets/themes/gaming/card-front-icons/levelup.png";
 import minecraft from "../assets/themes/gaming/card-front-icons/minecraft.png";
 import pacman from "../assets/themes/gaming/card-front-icons/pacman.png";
+import pac from "../assets/themes/gaming/card-front-icons/pac.png";
 import play from "../assets/themes/gaming/card-front-icons/playbutton.png";
 import puzzle from "../assets/themes/gaming/card-front-icons/puzzle.png";
 import snake from "../assets/themes/gaming/card-front-icons/snake.png";
@@ -33,6 +34,7 @@ export const gamingTheme: Theme = {
     levelup,
     minecraft,
     pacman,
+    pac,
     play,
     puzzle,
     snake,
