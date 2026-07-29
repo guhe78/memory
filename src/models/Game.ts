@@ -2,6 +2,7 @@ import { Card } from "./Card";
 import { Deck } from "./Deck";
 import { ThemeName } from "../themes";
 import { Player } from "./Player";
+import { GameOver } from "./GameOver";
 
 export type GameState = {
   scores: [number, number];
@@ -19,6 +20,7 @@ export class Game {
   private players: Player[];
   private currentPlayer: 0 | 1 = 0;
   private readonly onStateChange?: GameStateListener;
+  private readonly gameOverScreen: GameOver;
 
   constructor(
     field: HTMLDivElement,
@@ -32,9 +34,11 @@ export class Game {
     this.deck = new Deck(field, size, theme);
     this.players = [new Player(playerNames[0]), new Player(playerNames[1])];
     this.onStateChange = onStateChange;
+    this.gameOverScreen = new GameOver();
   }
 
   public start(): void {
+    //fakeGameOver("Blue", "Orange", 5, 3, this.theme);
     this.deck.create();
     this.handleCardClick();
     this.sendStateUpdate();
@@ -102,16 +106,23 @@ export class Game {
     console.log("gameover");
     if (!allMatched) return;
 
-    const params = new URLSearchParams({
-      theme: this.theme,
-      playerone: this.players[0].getName(),
-      playertwo: this.players[1].getName(),
-      scoreone: this.players[0].getScore().toString(),
-      scoretwo: this.players[1].getScore().toString(),
-    });
-
-    setTimeout(() => {
-      window.location.href = `/gameover.html?${params.toString()}`;
-    }, 3000);
+    this.gameOverScreen.show(
+      this.players[0].getName(),
+      this.players[1].getName(),
+      this.players[0].getScore(),
+      this.players[1].getScore(),
+      this.theme,
+    );
   }
+}
+
+function fakeGameOver(
+  playerOne: string,
+  playerTwo: string,
+  pointOne: number,
+  pointTwo: number,
+  theme: string,
+): void {
+  const gameOverScreen = new GameOver();
+  gameOverScreen.show(playerOne, playerTwo, pointOne, pointTwo, theme as ThemeName);
 }
