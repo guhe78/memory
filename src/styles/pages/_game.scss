@@ -60,6 +60,13 @@
   background-color: var(--scoreboard-background-color);
   border-radius: 10px;
   box-shadow: var(--scoreboard-box-shadow);
+
+  &--gameover {
+    background-color: var(--gameover-scoreboard-background-color);
+    border-radius: var(--gameover-scoreboard-border-radius);
+    padding: var(--gameover-scoreboard-padding);
+    gap: var(--gameover-scoreboard-gap);
+  }
 }
 
 .player-one,
@@ -67,17 +74,31 @@
   font-weight: 700;
   font-size: 24px;
 
-  & svg {
-    width: var(--player-symbol-width);
-    height: auto;
-  }
-}
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-.player-one,
-.player-two {
-  & svg {
-    width: var(--player-symbol-width);
-    height: auto;
+  gap: 8px;
+
+  &--gameover {
+    & span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+
+      font-family: var(--gameover-player-score-font-family);
+      font-size: var(--gameover-player-score-font-size);
+      font-weight: var(--gameover-player-score-font-weight);
+    }
+
+    & svg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: var(--gameover-scoreboard-player-icon-width);
+      height: var(--gameover-scoreboard-player-icon-height);
+    }
   }
 }
 
@@ -318,8 +339,9 @@
     margin: 0;
     font-family: var(--gameover-font-family);
     font-size: var(--gameover-title-font-size);
-    font-weight: 700;
+    font-weight: var(--gameover-title-font-weight);
     color: var(--gameover-title-text-color);
+    text-shadow: var(--gameover-title-text-shadow);
 
     & svg {
       width: auto;
@@ -373,27 +395,28 @@
   transform: translateY(-100%);
   transition: transform 0.6s ease;
 
-  background: var(--gameover-background-color);
-  color: var(--gameover-text-color);
-  font-family: var(--gameover-font-family);
-  font-size: var(--gameover-font-size);
-  font-weight: var(--gameover-font-weight);
+  background: var(--winner-overlay-background-color);
+  color: var(--winner-overlay-text-color);
+  font-family: var(--winner-overlay-font-family);
+  font-size: var(--winner-overlay-font-size);
+  font-weight: var(--winner-overlay-font-weight);
 
   &.show {
     transform: translateY(0);
   }
-}
 
-.winner-overlay {
+  &--code {
+    justify-content: flex-start;
+  }
+
   &__title {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 8px;
-    font-family: var(--gameover-font-family);
+    font-family: var(--winner-overlay-font-family);
     font-size: var(--winner-overlay-title-font-size);
-    font-weight: var(--gameover-title-font-weight);
+    font-weight: var(--winner-overlay-title-font-weight);
   }
 
   &__player {
@@ -407,16 +430,17 @@
   &__player-name {
     font-size: var(--winner-overlay-player-name-font-size);
     font-weight: var(--winner-overlay-font-weight);
-    text-transform: uppercase;
+    text-shadow: none;
+    text-transform: none;
   }
   &__content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 64px;
 
     &__button {
+      font-family: var(--winner-overlay-button-font-family);
       font-size: var(--winner-overlay-button-font-size);
       padding: var(--winner-overlay-button-padding);
       font-weight: var(--winner-overlay-button-font-weight);
@@ -433,14 +457,6 @@
         cursor: pointer;
       }
     }
-    &--confetti {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-image: url("src/assets/themes/code-vibes/images/confetti.svg");
-    }
   }
 
   &__icon {
@@ -449,12 +465,56 @@
     align-items: center;
     width: var(--winner-overlay-icon-width);
     height: var(--winner-overlay-icon-height);
+
+    &--cup {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      transform: translate(9px, 0);
+    }
   }
 }
 
 @media (min-width: 1440px) {
   .winner-overlay__content--confetti {
     background-image: url("src/assets/themes/code-vibes/images/confetti-extra.svg");
+  }
+}
+
+.code-theme .winner-overlay__player-name {
+  text-transform: uppercase;
+}
+
+.gaming-theme .winner-overlay__player-name {
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.foods-theme {
+  & .winner-overlay__player-name {
+    color: rgba(164, 82, 18, 1);
+  }
+
+  & .winner-overlay__icon {
+    background-color: rgba(247, 230, 213, 1);
+    width: 260px;
+    height: 298px;
+
+    & svg {
+      width: var(--winner-overlay-icon-width);
+      height: var(--winner-overlay-icon-height);
+      transform: translate(4px, 0);
+    }
+  }
+
+  & .winner-overlay__content__button {
+    font-family: "Delius Unicase";
+
+    &:hover {
+      background-color: rgba(243, 131, 45, 0.7);
+      cursor: pointer;
+    }
   }
 }
 
@@ -471,11 +531,11 @@
   transform: translateY(-100%);
   transition: transform 0.6s ease;
 
-  background: var(--gameover-background-color);
-  color: var(--gameover-text-color);
-  font-family: var(--gameover-font-family);
-  font-size: var(--gameover-font-size);
-  font-weight: var(--gameover-font-weight);
+  background: var(--draw-overlay-background-color);
+  color: var(--draw-overlay-text-color);
+  font-family: var(--draw-overlay-font-family);
+  font-size: var(--draw-overlay-font-size);
+  font-weight: var(--draw-overlay-font-weight);
 
   &.show {
     transform: translateY(0);

@@ -27,9 +27,9 @@ export class GameOver {
     const playerOneColorClass = isBlueFirst ? "player-blue" : "player-orange";
     const playerTwoColorClass = isBlueFirst ? "player-orange" : "player-blue";
     const playerOneLabel =
-      theme === "code" ? `${uiIcons.label()}${playerOne}` : `${uiIcons.chessFigure()} ${playerOne}`;
+      theme === "code" ? `${uiIcons.label()}${playerOne}` : `${uiIcons.chessFigure()}`;
     const playerTwoLabel =
-      theme === "code" ? `${uiIcons.label()}${playerTwo}` : `${uiIcons.chessFigure()} ${playerTwo}`;
+      theme === "code" ? `${uiIcons.label()}${playerTwo}` : `${uiIcons.chessFigure()}`;
 
     const titleMarkup = isCodeTheme
       ? `
@@ -47,14 +47,15 @@ export class GameOver {
       `;
     this.container.innerHTML = `
         ${titleMarkup}
-        <div class="score-board score-board-gameover">
-          <div class="player-one ${playerOneColorClass}" id="player-one-gameover">
-          <span id="player-one-symbol-gameover">${playerOneLabel}</span>
-            <span id="player-one-score-gameover">${scoreOne}</span>
+        <p>Final score</p>
+        <div class="score-board score-board--gameover">
+          <div class="player-one player-one--gameover ${playerOneColorClass}" id="player-one-gameover">
+            <span id="player-one-symbol-gameover">${playerOneLabel}</span>
+            <span class="player-one--score" id="player-one-score-gameover">${scoreOne}</span>
           </div>
-          <div class="player-two ${playerTwoColorClass}" id="player-two-gameover">
+          <div class="player-two player-two--gameover ${playerTwoColorClass}" id="player-two-gameover">
             <span id="player-two-symbol-gameover">${playerTwoLabel}</span>
-            <span id="player-two-score-gameover">${scoreTwo}</span>
+            <span class="player-two--score" id="player-two-score-gameover">${scoreTwo}</span>
           </div>
         </div>
       `;
@@ -68,7 +69,7 @@ export class GameOver {
       if (winner) {
         this.winnerOverlay.show(playerOne, playerTwo, scoreOne, scoreTwo, theme);
         this.container.classList.remove("show");
-      } else {
+      } else if (winner === null) {
         this.drawOverlay.show(theme);
         this.container.classList.remove("show");
       }
