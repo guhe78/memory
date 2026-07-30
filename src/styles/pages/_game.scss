@@ -483,8 +483,40 @@
   }
 }
 
-.code-theme .winner-overlay__player-name {
-  text-transform: uppercase;
+.draw-overlay__icon--container {
+  position: relative;
+  display: inline-block;
+  width: 420px;
+  height: 80px;
+}
+
+.code-theme {
+  & .winner-overlay__player-name {
+    text-transform: uppercase;
+  }
+}
+
+& .draw-overlay__icon {
+  position: absolute;
+  inset: 0;
+
+  & svg {
+    width: 420px;
+    height: auto;
+    display: block;
+  }
+
+  &--front {
+    z-index: 2;
+    color: rgba(77, 213, 188, 1);
+    filter: drop-shadow(-7px 0px 8px rgba(77, 213, 188, 0.5));
+  }
+
+  &--back {
+    color: rgba(255, 255, 255, 1);
+    z-index: 1;
+    transform: translate(-4px, -2px);
+  }
 }
 
 .gaming-theme .winner-overlay__player-name {
@@ -540,4 +572,45 @@
   &.show {
     transform: translateY(0);
   }
+
+  &__title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--draw-overlay-font-family);
+    font-size: var(--draw-overlay-title-font-size);
+    font-weight: var(--draw-overlay-title-font-weight);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+  }
+}
+
+.draw-text-or-icons {
+  font-family: var(--draw-overlay-font-family);
+  font-size: var(--draw-overlay-title-headline-font-size);
+  font-weight: var(--draw-overlay-title-headline-font-weight);
+  color: var(--draw-overlay-title-headline-text-color);
+  text-shadow: var(--draw-overlay-title-headline-text-shadow);
+}
+
+.scale {
+  & svg {
+    width: var(--scale-width);
+    height: var(--scale-height);
+    fill: var(--scale-fill);
+    stroke: var(--scale-stroke);
+    stroke-width: var(--scale-stroke-width);
+  }
+}
+
+.foods-theme .scale-container {
+  background-color: rgba(247, 230, 213, 1);
+  padding: 24px;
+  padding-top: 30px;
 }

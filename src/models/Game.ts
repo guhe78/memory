@@ -38,10 +38,10 @@ export class Game {
   }
 
   public start(): void {
-    fakeGameOver("Orange", "Blue", 4, 4, this.theme);
-    //this.deck.create();
-    //this.handleCardClick();
-    // this.sendStateUpdate();
+    //fakeGameOver("Orange", "Blue", 5, 4, this.theme);
+    this.deck.create();
+    this.handleCardClick();
+    this.sendStateUpdate();
   }
 
   private sendStateUpdate(): void {
