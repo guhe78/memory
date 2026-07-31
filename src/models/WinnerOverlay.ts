@@ -23,13 +23,7 @@ export class WinnerOverlay {
    * @param scoreTwo - The final score of the second player.
    * @param theme - The current theme of the game.
    */
-  public show(
-    playerOne: string,
-    playerTwo: string,
-    scoreOne: number,
-    scoreTwo: number,
-    theme: ThemeName,
-  ): void {
+  public show(playerOne: string, theme: ThemeName): void {
     this.container.innerHTML = containerTemplate(playerOne, uiIcons.chessFigure());
 
     const elements = this.getElements();
