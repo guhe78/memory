@@ -43,9 +43,7 @@
 }
 
 .settings-left-container {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
+  @include mixin.flex(column, null, null, null, 48px);
 }
 
 .choose-container {
@@ -78,9 +76,7 @@
 }
 
 .input-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  @include mixin.flex-center(row, 12px);
   cursor: pointer;
 
   label {
@@ -133,10 +129,7 @@
 }
 
 .preview-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
+  @include mixin.flex-between(column, flex-end);
 
   & img {
     border-radius: 16px;
@@ -169,13 +162,10 @@
   padding: 14px 20px;
   background-color: rgba(240, 234, 110, 1);
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  @include mixin.flex-center(row, 8px);
 
   span {
-    display: flex;
+    @include mixin.flex-center(row);
   }
 
   &:disabled {
