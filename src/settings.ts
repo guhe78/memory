@@ -24,6 +24,8 @@ document.querySelectorAll<HTMLElement>(".label-line").forEach((line) => {
   line.innerHTML = lineChosen;
 });
 
+initSettings();
+
 /**
  * Initializes the settings page by setting up the theme preview, synchronizing the preview board text, adding input listeners, adding symbols, and setting up the start game button listener.
  */
@@ -162,5 +164,3 @@ function addSymbols() {
   boardSizeSubheading.innerHTML = uiIcons.board(20);
   startGameButton.innerHTML = uiIcons.display(20);
 }
-
-initSettings();
