@@ -107,15 +107,45 @@ export class GameOver {
 
       if (winner) {
         this.winnerOverlay.show(playerOne, playerTwo, scoreOne, scoreTwo, theme);
-        this.container.classList.remove("show");
+        this.hideAfterOverlayShown("winner-overlay");
         return;
       }
 
-      if (winner === null) {
-        this.drawOverlay.show(theme);
-        this.container.classList.remove("show");
-      }
+      this.drawOverlay.show(theme);
+      this.hideAfterOverlayShown("draw-overlay");
     }, 3000);
+  }
+
+  /**
+   * Hides the game over screen after the overlay has been shown and any transitions have completed.
+   * @param overlayId - The ID of the overlay that was shown ("winner-overlay" or "draw-overlay").
+   */
+  private hideAfterOverlayShown(overlayId: "winner-overlay" | "draw-overlay"): void {
+    const overlay = document.getElementById(overlayId);
+
+    if (!overlay) {
+      this.container.classList.remove("show");
+      return;
+    }
+
+    let handled = false;
+    const done = () => {
+      if (handled) return;
+      handled = true;
+      this.container.classList.remove("show");
+    };
+
+    const onTransitionEnd = (event: TransitionEvent) => {
+      if (event.target !== overlay) return;
+      done();
+    };
+
+    overlay.addEventListener("transitionend", onTransitionEnd, { once: true });
+
+    window.setTimeout(() => {
+      overlay.removeEventListener("transitionend", onTransitionEnd);
+      done();
+    }, 800);
   }
 
   /**

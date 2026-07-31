@@ -404,7 +404,6 @@
 .winner-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
 
   display: flex;
   flex-direction: column;
@@ -569,10 +568,14 @@
   }
 }
 
+.winner-overlay,
+.draw-overlay {
+  z-index: 1100;
+}
+
 .draw-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
 
   display: flex;
   flex-direction: column;
