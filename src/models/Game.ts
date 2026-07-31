@@ -38,10 +38,13 @@ export class Game {
   }
 
   public start(): void {
-    fakeGameOver("Orange", "Blue", 6, 4, this.theme);
-    // this.deck.create();
-    // this.handleCardClick();
-    // this.sendStateUpdate();
+    this.deck.create();
+    this.initializeTurnHandling();
+    this.sendStateUpdate();
+  }
+
+  private initializeTurnHandling(): void {
+    this.handleCardClick();
   }
 
   private sendStateUpdate(): void {
@@ -52,44 +55,73 @@ export class Game {
   }
 
   private checkMatch(): void {
-    const [firstCard, secondCard] = this.flippedCards;
-
-    if (firstCard.symbol === secondCard.symbol) {
-      firstCard.match();
-      secondCard.match();
-      this.players[this.currentPlayer].addPoint();
-      this.flippedCards = [];
-      this.sendStateUpdate();
-      this.gameOver();
+    if (this.isMatch()) {
+      this.handleMatch();
       return;
     }
 
     this.nextTurn();
   }
 
-  private nextTurn(): void {
-    this.isLocked = true;
+  private isMatch(): boolean {
+    const [firstCard, secondCard] = this.flippedCards;
+    return firstCard.symbol === secondCard.symbol;
+  }
 
+  private handleMatch(): void {
+    this.matchCards();
+    this.awardPoint();
+    this.resetFlippedCards();
+    this.sendStateUpdate();
+    this.gameOver();
+  }
+
+  private matchCards(): void {
+    const [firstCard, secondCard] = this.flippedCards;
+    firstCard.match();
+    secondCard.match();
+  }
+
+  private awardPoint(): void {
+    this.players[this.currentPlayer].addPoint();
+  }
+
+  private resetFlippedCards(): void {
+    this.flippedCards = [];
+  }
+
+  private nextTurn(): void {
+    this.lockGame();
     window.setTimeout(() => {
-      this.flippedCards.forEach((card) => card.unflip());
-      this.flippedCards = [];
-      this.isLocked = false;
-      this.currentPlayer = this.currentPlayer === 0 ? 1 : 0;
+      this.unflipCards();
+      this.resetFlippedCards();
+      this.unlockGame();
+      this.switchPlayer();
       this.sendStateUpdate();
     }, 800);
   }
 
+  private lockGame(): void {
+    this.isLocked = true;
+  }
+
+  private unlockGame(): void {
+    this.isLocked = false;
+  }
+
+  private unflipCards(): void {
+    this.flippedCards.forEach((card) => card.unflip());
+  }
+
+  private switchPlayer(): void {
+    this.currentPlayer = this.currentPlayer === 0 ? 1 : 0;
+  }
+
   private handleCardClick(): void {
     this.field.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
-      const cardElement = target.closest(".card") as HTMLButtonElement | null;
+      const card = this.getClickedCard(event);
 
-      if (!cardElement || this.isLocked) return;
-
-      const cardId = Number(cardElement.dataset.cardId);
-      const card = this.deck.getCards().find((item) => item.id === cardId);
-
-      if (!card) return;
+      if (!card || this.isLocked) return;
       if (!card.flip()) return;
 
       this.flippedCards.push(card);
@@ -100,12 +132,27 @@ export class Game {
     });
   }
 
+  private getClickedCard(event: MouseEvent): Card | null {
+    const target = event.target as HTMLElement;
+    const cardElement = target.closest(".card") as HTMLButtonElement | null;
+
+    if (!cardElement) return null;
+
+    const cardId = Number(cardElement.dataset.cardId);
+    return this.deck.getCards().find((item) => item.id === cardId) ?? null;
+  }
+
   private gameOver(): void {
-    const allMatched = this.deck.getCards().every((card) => card.matched);
+    if (!this.isGameFinished()) return;
 
-    console.log("gameover");
-    if (!allMatched) return;
+    this.showGameOverScreen();
+  }
 
+  private isGameFinished(): boolean {
+    return this.deck.getCards().every((card) => card.matched);
+  }
+
+  private showGameOverScreen(): void {
     this.gameOverScreen.show(
       this.players[0].getName(),
       this.players[1].getName(),
@@ -114,15 +161,4 @@ export class Game {
       this.theme,
     );
   }
-}
-
-function fakeGameOver(
-  playerOne: string,
-  playerTwo: string,
-  pointOne: number,
-  pointTwo: number,
-  theme: string,
-): void {
-  const gameOverScreen = new GameOver();
-  gameOverScreen.show(playerOne, playerTwo, pointOne, pointTwo, theme as ThemeName);
 }
