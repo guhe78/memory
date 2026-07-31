@@ -56,3 +56,16 @@
     }
   }
 }
+
+.controller-image {
+  width: 400px;
+  height: 500px;
+  background-image: url("../../assets/themes/home-screen-image/controller.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
