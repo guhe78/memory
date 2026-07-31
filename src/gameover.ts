@@ -11,11 +11,17 @@ const scoreTwo = params.get("scoretwo") || "0";
 
 initGameoverPage();
 
+/**
+ * Initializes the game over page by setting the page style and rendering the score table.
+ */
 function initGameoverPage() {
   initPageStyle();
   renderScoreTable();
 }
 
+/**
+ * Initializes the page style based on the current theme, applying the appropriate CSS classes to the body element.
+ */
 function initPageStyle() {
   const themeClassMap: Record<ThemeName, string> = {
     code: "code-theme",
@@ -28,6 +34,9 @@ function initPageStyle() {
   document.body.classList.add(themeClassMap[theme]);
 }
 
+/**
+ * Renders the score table on the game over page, displaying player names, scores, and applying theme-specific styles and icons.
+ */
 function renderScoreTable() {
   const gameOverTitle = document.getElementById("game-over-title") as HTMLHeadingElement;
   const playerOneName = document.getElementById("player-one-symbol-gameover") as HTMLSpanElement;

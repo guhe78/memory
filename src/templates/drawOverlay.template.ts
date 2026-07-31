@@ -1,3 +1,7 @@
+/**
+ * Generates the HTML template for the draw overlay container.
+ * @returns A string containing the HTML structure for the draw overlay.
+ */
 export function containerTemplate(): string {
   return `
     <div class="draw-overlay__content">
@@ -11,6 +15,11 @@ export function containerTemplate(): string {
   `;
 }
 
+/**
+ * Generates the HTML template for the scale container in the "code" theme.
+ * @param drawText - The text to be displayed in the draw overlay.
+ * @returns A string containing the HTML structure for the scale container in the "code" theme.
+ */
 export function scaleContainerCodeThemeTemplate(drawText: string): string {
   return `
           <div class="draw-overlay__icon--container">
@@ -20,6 +29,11 @@ export function scaleContainerCodeThemeTemplate(drawText: string): string {
         `;
 }
 
+/**
+ * Generates the HTML template for the scale container in themes other than "code".
+ * @param drawIcon - The icon to be displayed in the draw overlay.
+ * @returns A string containing the HTML structure for the scale container in themes other than "code".
+ */
 export function scaleContainerTemplate(scaleIcon: string): string {
   return `<div class="scale">${scaleIcon}</div>`;
 }
