@@ -80,6 +80,18 @@
 
   gap: 8px;
 
+  & svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
   &--gameover {
     & span {
       display: flex;
@@ -100,6 +112,14 @@
       height: var(--gameover-scoreboard-player-icon-height);
     }
   }
+}
+
+.player-symbol,
+.player-score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .current-player {
