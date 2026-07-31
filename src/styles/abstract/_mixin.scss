@@ -8,14 +8,14 @@
 @mixin flex-start($direction: row) {
   display: flex;
   flex-direction: $direction;
-  justify-content: flex-center;
+  justify-content: flex-start;
   align-items: flex-start;
 }
 
 @mixin flex-end($direction: row) {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-end;
   flex-direction: $direction;
 }
 

@@ -1,11 +1,15 @@
 @use "../abstract/mixin";
+@use "../abstract/themes";
+@use "../abstract/variables" as vars;
+
+@use "sass:map";
 
 .headline-title {
   font-size: 140px;
 }
 
 .headline-subtitle {
-  font-family: "Almarai Regular";
+  font-family: "Almarai";
   font-size: 48px;
 }
 
