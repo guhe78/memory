@@ -11,9 +11,9 @@ const theme = (params.get("theme") || "code") as ThemeName;
 initGamePage();
 
 function initGamePage() {
+  setHeaderTheme();
   setGameBoard(theme, Number(params.get("size")) ?? 16, params.get("player") ?? "blue");
   initExitDialog();
-  setHeaderTheme();
   setExitPopUpButtons();
 }
 

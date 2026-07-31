@@ -199,9 +199,9 @@
 .board-seperator {
   color: rgba(240, 234, 110, 1);
 
-  &-unchoosen {
-    background-color: rgba(240, 234, 110, 1);
-    transform: rotate(9deg);
+  & svg {
+    width: auto;
+    height: 56px;
   }
 }
 

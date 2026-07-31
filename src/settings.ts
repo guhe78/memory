@@ -65,14 +65,14 @@ function syncPreviewBoardText() {
 
   if (boardSeparators[0]) {
     boardSeparators[0].innerHTML = playerSelected
-      ? uiIcons.seperatorChoosen(32)
-      : uiIcons.seperatorUnchoosen(32);
+      ? uiIcons.seperatorChoosen()
+      : uiIcons.seperatorUnchoosen();
   }
 
   if (boardSeparators[1]) {
     boardSeparators[1].innerHTML = sizeSelected
-      ? uiIcons.seperatorChoosen(32)
-      : uiIcons.seperatorUnchoosen(32);
+      ? uiIcons.seperatorChoosen()
+      : uiIcons.seperatorUnchoosen();
   }
 
   if (playerSelected && sizeSelected) startGameButton.disabled = false;
