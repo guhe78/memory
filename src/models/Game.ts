@@ -2,6 +2,7 @@ import { Card } from "./Card";
 import { Deck } from "./Deck";
 import { ThemeName } from "../themes";
 import { Player } from "./Player";
+import { GameOver } from "./GameOver";
 
 export type GameState = {
   scores: [number, number];
@@ -13,11 +14,13 @@ type GameStateListener = (state: GameState) => void;
 export class Game {
   private readonly deck: Deck;
   private readonly field: HTMLDivElement;
+  private readonly theme: ThemeName;
   private flippedCards: Card[] = [];
   private isLocked = false;
   private players: Player[];
   private currentPlayer: 0 | 1 = 0;
   private readonly onStateChange?: GameStateListener;
+  private readonly gameOverScreen: GameOver;
 
   constructor(
     field: HTMLDivElement,
@@ -27,9 +30,11 @@ export class Game {
     onStateChange?: GameStateListener,
   ) {
     this.field = field;
+    this.theme = theme;
     this.deck = new Deck(field, size, theme);
     this.players = [new Player(playerNames[0]), new Player(playerNames[1])];
     this.onStateChange = onStateChange;
+    this.gameOverScreen = new GameOver();
   }
 
   public start(): void {
@@ -97,8 +102,26 @@ export class Game {
   private gameOver(): void {
     const allMatched = this.deck.getCards().every((card) => card.matched);
 
+    console.log("gameover");
     if (!allMatched) return;
 
-    console.log("gameover");
+    this.gameOverScreen.show(
+      this.players[0].getName(),
+      this.players[1].getName(),
+      this.players[0].getScore(),
+      this.players[1].getScore(),
+      this.theme,
+    );
   }
+}
+
+function fakeGameOver(
+  playerOne: string,
+  playerTwo: string,
+  pointOne: number,
+  pointTwo: number,
+  theme: string,
+): void {
+  const gameOverScreen = new GameOver();
+  gameOverScreen.show(playerOne, playerTwo, pointOne, pointTwo, theme as ThemeName);
 }

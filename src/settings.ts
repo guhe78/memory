@@ -126,7 +126,7 @@ function addSymbols() {
 
   headlineUnderline.innerHTML = uiIcons.headlineUnderline();
   gameSubheading.innerHTML = uiIcons.palette(20);
-  playerSubheading.innerHTML = uiIcons.chessFigure(20);
+  playerSubheading.innerHTML = uiIcons.chessFigure();
   boardSizeSubheading.innerHTML = uiIcons.board(20);
   startGameButton.innerHTML = uiIcons.display(20);
 }

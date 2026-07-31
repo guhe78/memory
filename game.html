@@ -26,11 +26,13 @@
     <main class="main-game">
       <header class="game-board-head">
         <div class="score-board">
-          <div class="player-one" id="player-one">
-            <span id="player-one-symbol">One</span> <span id="player-one-score">4</span>
+          <div class="player-one player-one__header" id="player-one">
+            <span class="player-symbol" id="player-one-symbol">One</span>
+            <span class="player-score" id="player-one-score">4</span>
           </div>
-          <div class="player-two" id="player-two">
-            <span id="player-two-symbol">Two</span> <span id="player-two-score">3</span>
+          <div class="player-two player-two__header" id="player-two">
+            <span class="player-symbol" id="player-two-symbol">Two</span>
+            <span class="player-score" id="player-two-score">3</span>
           </div>
         </div>
         <div class="current-player">
@@ -49,6 +51,17 @@
           </div>
         </div>
       </dialog>
+      <div id="game-over" class="game-over"></div>
+      <div id="winner-overlay" class="winner-overlay">
+        <div class="winner-overlay-content" id="winner-overlay-content">
+          <button class="button-popup-exit button-popup-exit__ok" id="winner-ok">OK</button>
+        </div>
+      </div>
+      <div id="draw-overlay" class="draw-overlay">
+        <div class="draw-overlay-content" id="draw-overlay-content">
+          <button class="button-popup-exit button-popup-exit__ok" id="draw-ok">OK</button>
+        </div>
+      </div>
     </main>
     <script type="module" src="./src/game.ts"></script>
   </body>
