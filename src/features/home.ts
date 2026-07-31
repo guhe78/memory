@@ -1,5 +1,8 @@
 import { uiIcons } from "../assets/icons/ui-svg";
 
+/**
+ * Initializes the home page by setting up the start button.
+ */
 export function startButton() {
   const startBtn = document.getElementById("start-button");
 
