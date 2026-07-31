@@ -10,6 +10,9 @@ const theme = (params.get("theme") || "code") as ThemeName;
 
 initGamePage();
 
+/**
+ * Initializes the game page by setting the header theme, configuring the game board, and initializing the exit dialog.
+ */
 function initGamePage() {
   setHeaderTheme();
   setGameBoard(theme, Number(params.get("size")) ?? 16, params.get("player") ?? "blue");
@@ -17,6 +20,12 @@ function initGamePage() {
   setExitPopUpButtons();
 }
 
+/**
+ * Sets up the game board based on the specified theme, number of cards, and starting player.
+ * @param theme - The theme of the game (e.g., "code", "da", "gaming", "foods").
+ * @param cards - The number of cards in the deck (must be even).
+ * @param player - The starting player ("blue" or "orange").
+ */
 function setGameBoard(theme: ThemeName, cards: number, player: string) {
   const themeClassMap: Record<ThemeName, string> = {
     code: "code-theme",
@@ -44,6 +53,10 @@ function setGameBoard(theme: ThemeName, cards: number, player: string) {
   game.start();
 }
 
+/**
+ * Updates the scoreboard based on the current game state, including player scores and highlighting the current player.
+ * @param state - The current state of the game, including scores and the index of the current player.
+ */
 function updateScoreboard(state: GameState) {
   const playerOneScore = document.getElementById("player-one-score") as HTMLSpanElement;
   const playerTwoScore = document.getElementById("player-two-score") as HTMLSpanElement;
@@ -61,6 +74,10 @@ function updateScoreboard(state: GameState) {
   updateCurrentPlayerColor(currentPlayerElement);
 }
 
+/**
+ * Updates the color of the current player's symbol based on the active player.
+ * @param currentPlayerElement - The HTMLDivElement representing the current player.
+ */
 function updateCurrentPlayerColor(currentPlayerElement: HTMLDivElement) {
   const currentPlayerColor = document.getElementById("current-player-symbol") as HTMLSpanElement;
   const isBlue = currentPlayerElement.classList.contains("player-blue");
@@ -74,6 +91,9 @@ function updateCurrentPlayerColor(currentPlayerElement: HTMLDivElement) {
   }
 }
 
+/**
+ * Initializes the exit dialog, setting up event listeners for the exit button and the "Yes" and "No" options in the dialog.
+ */
 function initExitDialog() {
   const dialog = new Dialog(document.getElementById("exit-dialog") as HTMLDialogElement);
   const exitButton = document.getElementById("exit-button") as HTMLButtonElement;
@@ -98,6 +118,9 @@ function initExitDialog() {
   });
 }
 
+/**
+ * Sets the header theme based on the current game theme and player color, updating the player symbols and labels accordingly.
+ */
 function setHeaderTheme() {
   const playerOne = document.getElementById("player-one") as HTMLDivElement;
   const playerTwo = document.getElementById("player-two") as HTMLDivElement;
@@ -131,6 +154,9 @@ function setHeaderTheme() {
   }
 }
 
+/**
+ * Sets up the text and icons for the exit pop-up buttons based on the current theme.
+ */
 function setExitPopUpButtons() {
   const theme = params.get("theme");
   const yesButton = document.getElementById("exit-yes") as HTMLButtonElement;

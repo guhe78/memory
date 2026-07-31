@@ -8,17 +8,30 @@ import { ThemeName } from "../themes";
 import { DrawOverlay } from "./DrawOverlay";
 import { WinnerOverlay } from "./WinnerOverlay";
 
+/**
+ * Represents the game over screen, displaying the final scores and player names.
+ */
 export class GameOver {
   private container: HTMLElement;
   private readonly winnerOverlay: WinnerOverlay;
   private readonly drawOverlay: DrawOverlay;
 
+  /**   * Initializes a new instance of the GameOver class.
+   */
   constructor() {
     this.container = document.getElementById("game-over")!;
     this.winnerOverlay = new WinnerOverlay();
     this.drawOverlay = new DrawOverlay();
   }
 
+  /**
+   * Displays the game over screen with the final scores and player names.
+   * @param playerOne - The name of the first player.
+   * @param playerTwo - The name of the second player.
+   * @param scoreOne - The final score of the first player.
+   * @param scoreTwo - The final score of the second player.
+   * @param theme - The current theme of the game.
+   */
   public show(
     playerOne: string,
     playerTwo: string,
@@ -31,6 +44,14 @@ export class GameOver {
     this.showResultAfterDelay(playerOne, playerTwo, scoreOne, scoreTwo, theme);
   }
 
+  /**
+   * Renders the game over screen with the appropriate theme and player information.
+   * @param playerOne - The name of the first player.
+   * @param playerTwo - The name of the second player.
+   * @param scoreOne - The final score of the first player.
+   * @param scoreTwo - The final score of the second player.
+   * @param theme - The current theme of the game.
+   */
   private renderScreen(
     playerOne: string,
     playerTwo: string,
@@ -57,12 +78,23 @@ export class GameOver {
     )}`;
   }
 
+  /**
+   * Shows the game over screen after a short delay to allow for any animations or transitions.
+   */
   private showAfterDelay(): void {
     setTimeout(() => {
       this.container.classList.add("show");
     }, 1000);
   }
 
+  /**
+   * Determines the winner or if it's a draw and shows the appropriate overlay after a delay.
+   * @param playerOne - The name of the first player.
+   * @param playerTwo - The name of the second player.
+   * @param scoreOne - The final score of the first player.
+   * @param scoreTwo - The final score of the second player.
+   * @param theme - The current theme of the game.
+   */
   private showResultAfterDelay(
     playerOne: string,
     playerTwo: string,
@@ -86,6 +118,14 @@ export class GameOver {
     }, 3000);
   }
 
+  /**
+   * Determines the winner based on the scores of the players.
+   * @param playerOne - The name of the first player.
+   * @param playerTwo - The name of the second player.
+   * @param scoreOne - The final score of the first player.
+   * @param scoreTwo - The final score of the second player.
+   * @returns The name of the winning player, or null if it's a draw.
+   */
   private getPlayerClasses(playerOne: string): {
     playerOneColorClass: string;
     playerTwoColorClass: string;
@@ -98,6 +138,13 @@ export class GameOver {
     };
   }
 
+  /**
+   * Determines the labels for the players based on the theme.
+   * @param playerOne - The name of the first player.
+   * @param playerTwo - The name of the second player.
+   * @param theme - The current theme of the game.
+   * @returns An object containing the labels for both players.
+   */
   private getPlayerLabels(
     playerOne: string,
     playerTwo: string,
@@ -114,6 +161,13 @@ export class GameOver {
     };
   }
 
+  /**   * Determines the winner based on the scores of the players.
+   * @param playerOne - The name of the first player.
+   * @param playerTwo - The name of the second player.
+   * @param scoreOne - The final score of the first player.
+   * @param scoreTwo - The final score of the second player.
+   * @returns The name of the winning player, or null if it's a draw.
+   */
   private getWinner(
     playerOne: string,
     playerTwo: string,
@@ -126,6 +180,9 @@ export class GameOver {
     return null;
   }
 
+  /**   * Generates the SVG representation of the "Game Over" text for the "code" theme.
+   * @returns The SVG string for the "Game Over" text.
+   */
   private getGameOverSvg(): string {
     return (
       gameOverSvg.g() +

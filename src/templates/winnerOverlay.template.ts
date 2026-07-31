@@ -1,3 +1,9 @@
+/**
+ * Generates the HTML markup for the winner overlay container.
+ * @param playerOne - The name of the winning player.
+ * @param chessFigureIcon - The SVG icon representing the winning player's chess figure.
+ * @returns A string containing the HTML markup for the winner overlay container.
+ */
 export function containerTemplate(playerOne: string, chessFigureIcon: string): string {
   return `
       <div id="confetti-background" class="winner-overlay__confetti-background"></div>
@@ -14,6 +20,12 @@ export function containerTemplate(playerOne: string, chessFigureIcon: string): s
     `;
 }
 
+/**
+ * Generates the HTML markup for the confetti background in the winner overlay.
+ * @param confetti - The URL of the primary confetti image.
+ * @param confettiExtra - The URL of the extra confetti image for larger screens.
+ * @returns A string containing the HTML markup for the confetti background.
+ */
 export function confettiBackgroundTemplate(confetti: string, confettiExtra: string): string {
   return `
             <picture>
