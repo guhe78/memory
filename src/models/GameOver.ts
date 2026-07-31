@@ -106,7 +106,7 @@ export class GameOver {
       const winner = this.getWinner(playerOne, playerTwo, scoreOne, scoreTwo);
 
       if (winner) {
-        this.winnerOverlay.show(playerOne, playerTwo, scoreOne, scoreTwo, theme);
+        this.winnerOverlay.show(winner, theme);
         this.hideAfterOverlayShown("winner-overlay");
         return;
       }
