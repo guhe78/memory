@@ -3,5 +3,8 @@ export { Deck } from "./Deck";
 export { Card } from "./Card";
 export { Game } from "./Game";
 export { Player } from "./Player";
+export { WinnerOverlay } from "./WinnerOverlay";
+export { GameOver } from "./GameOver";
+export { DrawOverlay } from "./DrawOverlay";
 export type { Theme } from "./Theme";
 export type { GameState } from "./Game";
