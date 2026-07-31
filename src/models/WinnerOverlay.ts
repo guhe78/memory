@@ -1,4 +1,4 @@
-import { gameOverSvg, uiIcons } from "../assets/icons";
+import { uiIcons } from "../assets/icons";
 import { confettiBackgroundTemplate, containerTemplate } from "../templates/winnerOverlay.template";
 import { ThemeName } from "../themes";
 
@@ -16,16 +16,7 @@ export class WinnerOverlay {
     scoreTwo: number,
     theme: ThemeName,
   ): void {
-    const confetti = new URL("../assets/themes/code-vibes/images/confetti.svg", import.meta.url)
-      .href;
-    const confettiExtra = new URL(
-      "../assets/themes/code-vibes/images/confetti-extra.svg",
-      import.meta.url,
-    ).href;
-    const chessFigureIcon = uiIcons.chessFigure();
-    const cupIcon = new URL("../assets/themes/gaming/images/cup.svg", import.meta.url).href;
-
-    this.container.innerHTML = containerTemplate(playerOne, chessFigureIcon);
+    this.container.innerHTML = containerTemplate(playerOne, uiIcons.chessFigure());
 
     const elements = this.getElements();
     this.bindBackToMenu(elements.backToMenuButton);
@@ -34,7 +25,7 @@ export class WinnerOverlay {
       elements.winnerPlayerNameElement,
       elements.winnerPlayerIconElement,
     );
-    this.renderTheme(theme, elements, { confetti, confettiExtra, cupIcon });
+    this.renderTheme(theme, elements);
 
     this.container.classList.add("show");
   }
@@ -65,7 +56,6 @@ export class WinnerOverlay {
     playerIconElement: HTMLSpanElement,
   ): void {
     const colorClass = playerOne === "Orange" ? "player-orange" : "player-blue";
-
     playerNameElement.classList.add(colorClass);
     playerIconElement.classList.add(colorClass);
   }
@@ -77,19 +67,14 @@ export class WinnerOverlay {
       winnerPlayerNameElement: HTMLSpanElement;
       winnerPlayerIconElement: HTMLSpanElement;
     },
-    assets: {
-      confetti: string;
-      confettiExtra: string;
-      cupIcon: string;
-    },
   ): void {
     if (theme === "code") {
-      this.renderCodeTheme(elements, assets);
+      this.renderCodeTheme(elements);
       return;
     }
 
     if (theme === "gaming") {
-      elements.winnerPlayerIconElement.innerHTML = `<img src="${assets.cupIcon}" alt="Cup Icon" class="winner-overlay__icon--cup" />`;
+      this.renderGamingTheme(elements);
       return;
     }
 
@@ -98,26 +83,35 @@ export class WinnerOverlay {
     }
   }
 
-  private renderCodeTheme(
-    elements: {
-      backToMenuButton: HTMLButtonElement;
-      winnerPlayerNameElement: HTMLSpanElement;
-      winnerPlayerIconElement: HTMLSpanElement;
-    },
-    assets: {
-      confetti: string;
-      confettiExtra: string;
-      cupIcon: string;
-    },
-  ): void {
+  private renderCodeTheme(elements: {
+    backToMenuButton: HTMLButtonElement;
+    winnerPlayerNameElement: HTMLSpanElement;
+    winnerPlayerIconElement: HTMLSpanElement;
+  }): void {
+    const confetti = new URL("../assets/themes/code-vibes/images/confetti.svg", import.meta.url)
+      .href;
+    const confettiExtra = new URL(
+      "../assets/themes/code-vibes/images/confetti-extra.svg",
+      import.meta.url,
+    ).href;
+
     const confettiBackground = document.getElementById("confetti-background") as HTMLDivElement;
-    confettiBackground.innerHTML = confettiBackgroundTemplate(
-      assets.confetti,
-      assets.confettiExtra,
-    );
+    confettiBackground.innerHTML = confettiBackgroundTemplate(confetti, confettiExtra);
 
     this.container.classList.add("winner-overlay--code");
     elements.backToMenuButton.innerText = "Back to start";
+  }
+
+  private renderGamingTheme(elements: {
+    backToMenuButton: HTMLButtonElement;
+    winnerPlayerNameElement: HTMLSpanElement;
+    winnerPlayerIconElement: HTMLSpanElement;
+  }): void {
+    const cupIcon = new URL("../assets/themes/gaming/images/cup.svg", import.meta.url).href;
+
+    elements.winnerPlayerIconElement.innerHTML = `
+      <img src="${cupIcon}" alt="Cup Icon" class="winner-overlay__icon--cup" />
+    `;
   }
 
   private renderDaTheme(elements: {
