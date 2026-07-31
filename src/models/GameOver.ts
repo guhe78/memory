@@ -1,4 +1,9 @@
 import { gameOverSvg, uiIcons } from "../assets/icons";
+import {
+  containerTemplate,
+  titleMarkupCodeThemeTemplate,
+  titleMarkupTemplate,
+} from "../templates/gameOver.template";
 import { ThemeName } from "../themes";
 import { DrawOverlay } from "./DrawOverlay";
 import { WinnerOverlay } from "./WinnerOverlay";
@@ -32,33 +37,16 @@ export class GameOver {
       theme === "code" ? `${uiIcons.label()}${playerTwo}` : `${uiIcons.chessFigure()}`;
 
     const titleMarkup = isCodeTheme
-      ? `
-        <h1 class="game-over__title game-over__title--code">
-          <span class="game-over__title-layer game-over__title-layer--back">
-          ${svgWord}
-          </span>
-          <span class="game-over__title-layer game-over__title-layer--front">
-          ${svgWord}
-          </span>
-        </h1>
-      `
-      : `
-        <h1 class="game-over__title" id="game-over-title">Game Over</h1>
-      `;
-    this.container.innerHTML = `
-        ${titleMarkup}
-        <p>Final score</p>
-        <div class="score-board score-board--gameover">
-          <div class="player-one player-one--gameover ${playerOneColorClass}" id="player-one-gameover">
-            <span id="player-one-symbol-gameover">${playerOneLabel}</span>
-            <span class="player-one--score" id="player-one-score-gameover">${scoreOne}</span>
-          </div>
-          <div class="player-two player-two--gameover ${playerTwoColorClass}" id="player-two-gameover">
-            <span id="player-two-symbol-gameover">${playerTwoLabel}</span>
-            <span class="player-two--score" id="player-two-score-gameover">${scoreTwo}</span>
-          </div>
-        </div>
-      `;
+      ? titleMarkupCodeThemeTemplate(svgWord)
+      : titleMarkupTemplate(svgWord);
+    this.container.innerHTML = `${titleMarkup} ${containerTemplate(
+      playerOneColorClass,
+      playerTwoColorClass,
+      playerOneLabel,
+      playerTwoLabel,
+      scoreOne,
+      scoreTwo,
+    )}`;
 
     setTimeout(() => {
       this.container.classList.add("show");
