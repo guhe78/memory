@@ -1,7 +1,8 @@
+@use "../abstract/mixin";
+
 * {
   box-sizing: border-box;
   margin: 0;
-  //border: 1px solid red;
 }
 
 body {
@@ -9,9 +10,8 @@ body {
   color: rgba(255, 255, 255, 1);
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+  @include mixin.flex-center(column);
 }
 
 h1 {

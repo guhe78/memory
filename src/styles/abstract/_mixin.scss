@@ -1,32 +1,38 @@
-@mixin flex-center($direction: row) {
+@use "sass:meta";
+
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap, $gap: null) {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+
+  @if $gap != null {
+    gap: $gap;
+  }
 }
 
-@mixin flex-start($direction: row) {
-  display: flex;
-  flex-direction: $direction;
-  justify-content: flex-start;
-  align-items: flex-start;
+@mixin flex-center($direction: row, $gap: null) {
+  @include flex($direction, center, center, nowrap, $gap);
 }
 
-@mixin flex-end($direction: row) {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  flex-direction: $direction;
+@mixin flex-start($direction: row, $gap: null) {
+  @include flex($direction, flex-start, flex-start, nowrap, $gap);
 }
 
-@mixin flex-between($direction: row) {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: $direction;
+@mixin flex-end($direction: row, $gap: null) {
+  @include flex($direction, flex-end, flex-end, nowrap, $gap);
+}
+
+@mixin flex-between($direction: row, $align: center, $gap: null) {
+  @include flex($direction, space-between, $align, nowrap, $gap);
 }
 
 @mixin make-theme($theme-map) {
+  @if meta.type-of($theme-map) != "map" {
+    @error "make-theme erwartet eine Sass-Map.";
+  }
+
   @each $key, $value in $theme-map {
     --#{$key}: #{$value};
   }
