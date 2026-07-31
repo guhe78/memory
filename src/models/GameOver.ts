@@ -26,19 +26,27 @@ export class GameOver {
     scoreTwo: number,
     theme: ThemeName,
   ): void {
+    this.renderScreen(playerOne, playerTwo, scoreOne, scoreTwo, theme);
+    this.showAfterDelay();
+    this.showResultAfterDelay(playerOne, playerTwo, scoreOne, scoreTwo, theme);
+  }
+
+  private renderScreen(
+    playerOne: string,
+    playerTwo: string,
+    scoreOne: number,
+    scoreTwo: number,
+    theme: ThemeName,
+  ): void {
     const isCodeTheme = theme === "code";
     const svgWord = isCodeTheme ? this.getGameOverSvg() : "Game Over";
-    const isBlueFirst = playerOne.toLowerCase() === "blue";
-    const playerOneColorClass = isBlueFirst ? "player-blue" : "player-orange";
-    const playerTwoColorClass = isBlueFirst ? "player-orange" : "player-blue";
-    const playerOneLabel =
-      theme === "code" ? `${uiIcons.label()}${playerOne}` : `${uiIcons.chessFigure()}`;
-    const playerTwoLabel =
-      theme === "code" ? `${uiIcons.label()}${playerTwo}` : `${uiIcons.chessFigure()}`;
-
     const titleMarkup = isCodeTheme
       ? titleMarkupCodeThemeTemplate(svgWord)
       : titleMarkupTemplate(svgWord);
+
+    const { playerOneColorClass, playerTwoColorClass } = this.getPlayerClasses(playerOne);
+    const { playerOneLabel, playerTwoLabel } = this.getPlayerLabels(playerOne, playerTwo, theme);
+
     this.container.innerHTML = `${titleMarkup} ${containerTemplate(
       playerOneColorClass,
       playerTwoColorClass,
@@ -47,21 +55,63 @@ export class GameOver {
       scoreOne,
       scoreTwo,
     )}`;
+  }
 
+  private showAfterDelay(): void {
     setTimeout(() => {
       this.container.classList.add("show");
     }, 1000);
+  }
 
+  private showResultAfterDelay(
+    playerOne: string,
+    playerTwo: string,
+    scoreOne: number,
+    scoreTwo: number,
+    theme: ThemeName,
+  ): void {
     setTimeout(() => {
       const winner = this.getWinner(playerOne, playerTwo, scoreOne, scoreTwo);
+
       if (winner) {
         this.winnerOverlay.show(playerOne, playerTwo, scoreOne, scoreTwo, theme);
         this.container.classList.remove("show");
-      } else if (winner === null) {
+        return;
+      }
+
+      if (winner === null) {
         this.drawOverlay.show(theme);
         this.container.classList.remove("show");
       }
     }, 3000);
+  }
+
+  private getPlayerClasses(playerOne: string): {
+    playerOneColorClass: string;
+    playerTwoColorClass: string;
+  } {
+    const isBlueFirst = playerOne.toLowerCase() === "blue";
+
+    return {
+      playerOneColorClass: isBlueFirst ? "player-blue" : "player-orange",
+      playerTwoColorClass: isBlueFirst ? "player-orange" : "player-blue",
+    };
+  }
+
+  private getPlayerLabels(
+    playerOne: string,
+    playerTwo: string,
+    theme: ThemeName,
+  ): {
+    playerOneLabel: string;
+    playerTwoLabel: string;
+  } {
+    return {
+      playerOneLabel:
+        theme === "code" ? `${uiIcons.label()}${playerOne}` : `${uiIcons.chessFigure()}`,
+      playerTwoLabel:
+        theme === "code" ? `${uiIcons.label()}${playerTwo}` : `${uiIcons.chessFigure()}`,
+    };
   }
 
   private getWinner(
