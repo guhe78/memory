@@ -1,4 +1,5 @@
 import { gameOverSvg, uiIcons } from "../assets/icons";
+import { confettiBackgroundTemplate, containerTemplate } from "../templates/winnerOverlay.template";
 import { ThemeName } from "../themes";
 
 export class WinnerOverlay {
@@ -15,11 +16,6 @@ export class WinnerOverlay {
     scoreTwo: number,
     theme: ThemeName,
   ): void {
-    const isCodeTheme = theme === "code";
-    const isGamingTheme = theme === "gaming";
-    const isFoodsTheme = theme === "foods";
-    const isDaTheme = theme === "da";
-
     const confetti = new URL("../assets/themes/code-vibes/images/confetti.svg", import.meta.url)
       .href;
     const confettiExtra = new URL(
@@ -29,67 +25,111 @@ export class WinnerOverlay {
     const chessFigureIcon = uiIcons.chessFigure();
     const cupIcon = new URL("../assets/themes/gaming/images/cup.svg", import.meta.url).href;
 
-    this.container.innerHTML = `
-      <div id="confetti-background" class="winner-overlay__confetti-background"></div>
-      <div class="winner-overlay__content" id="winner-overlay-content">
-        <div class="winner-overlay__title-container">
-          <h1 class="winner-overlay__title">The winner is</h1>
-          <span class="winner-overlay__player-name" id="winner-overlay-player-name">${playerOne} Player</span>
-        </div>
-        <div class="winner-overlay__player" id="winner-overlay-player">
-          <span class="winner-overlay__icon" id="winner-overlay-icon">${chessFigureIcon}</span>
-        </div>
-        <button class="winner-overlay__content__button" id="back-to-menu-button">Home</button>
-      </div>
-    `;
+    this.container.innerHTML = containerTemplate(playerOne, chessFigureIcon);
 
-    const backToMenuButton = document.getElementById("back-to-menu-button") as HTMLButtonElement;
-    backToMenuButton.addEventListener("click", () => {
-      window.location.href = "/settings.html";
-    });
-    const winnerPlayerNameElement = document.getElementById(
-      "winner-overlay-player-name",
-    ) as HTMLSpanElement;
-    const winnerPlayerIconElement = document.getElementById(
-      "winner-overlay-icon",
-    ) as HTMLSpanElement;
-
-    if (playerOne === "Blue") {
-      winnerPlayerNameElement.classList.add("player-blue");
-      winnerPlayerIconElement.classList.add("player-blue");
-    } else if (playerOne === "Orange") {
-      winnerPlayerNameElement.classList.add("player-orange");
-      winnerPlayerIconElement.classList.add("player-orange");
-    }
-
-    switch (true) {
-      case isCodeTheme:
-        const confettiBackground = document.getElementById("confetti-background") as HTMLDivElement;
-        confettiBackground.innerHTML = `
-            <picture>
-              <source media="(min-width: 1440px)" srcset="${confettiExtra}" />
-              <img src="${confetti}" alt="Confetti Background" class="winner-overlay__confetti-image" />
-            </picture>
-        `;
-        this.container.classList.add("winner-overlay--code");
-        backToMenuButton.innerText = "Back to start";
-        break;
-      case isGamingTheme:
-        winnerPlayerIconElement.innerHTML = `<img src="${cupIcon}" alt="Cup Icon" class="winner-overlay__icon--cup" />`;
-        break;
-      case isFoodsTheme:
-        break;
-      case isDaTheme:
-        const chessFigureIconOutline = uiIcons.chessFigureOutlineBig();
-        winnerPlayerNameElement.classList.remove("player-blue");
-        winnerPlayerNameElement.classList.remove("player-orange");
-        winnerPlayerIconElement.innerHTML = `
-          <span class="winner-overlay__icon" id="winner-overlay-icon">${chessFigureIconOutline}</span>
-        `;
-        break;
-      default:
-    }
+    const elements = this.getElements();
+    this.bindBackToMenu(elements.backToMenuButton);
+    this.applyPlayerColor(
+      playerOne,
+      elements.winnerPlayerNameElement,
+      elements.winnerPlayerIconElement,
+    );
+    this.renderTheme(theme, elements, { confetti, confettiExtra, cupIcon });
 
     this.container.classList.add("show");
+  }
+
+  private getElements(): {
+    backToMenuButton: HTMLButtonElement;
+    winnerPlayerNameElement: HTMLSpanElement;
+    winnerPlayerIconElement: HTMLSpanElement;
+  } {
+    return {
+      backToMenuButton: document.getElementById("back-to-menu-button") as HTMLButtonElement,
+      winnerPlayerNameElement: document.getElementById(
+        "winner-overlay-player-name",
+      ) as HTMLSpanElement,
+      winnerPlayerIconElement: document.getElementById("winner-overlay-icon") as HTMLSpanElement,
+    };
+  }
+
+  private bindBackToMenu(button: HTMLButtonElement): void {
+    button.addEventListener("click", () => {
+      window.location.href = "/settings.html";
+    });
+  }
+
+  private applyPlayerColor(
+    playerOne: string,
+    playerNameElement: HTMLSpanElement,
+    playerIconElement: HTMLSpanElement,
+  ): void {
+    const colorClass = playerOne === "Orange" ? "player-orange" : "player-blue";
+
+    playerNameElement.classList.add(colorClass);
+    playerIconElement.classList.add(colorClass);
+  }
+
+  private renderTheme(
+    theme: ThemeName,
+    elements: {
+      backToMenuButton: HTMLButtonElement;
+      winnerPlayerNameElement: HTMLSpanElement;
+      winnerPlayerIconElement: HTMLSpanElement;
+    },
+    assets: {
+      confetti: string;
+      confettiExtra: string;
+      cupIcon: string;
+    },
+  ): void {
+    if (theme === "code") {
+      this.renderCodeTheme(elements, assets);
+      return;
+    }
+
+    if (theme === "gaming") {
+      elements.winnerPlayerIconElement.innerHTML = `<img src="${assets.cupIcon}" alt="Cup Icon" class="winner-overlay__icon--cup" />`;
+      return;
+    }
+
+    if (theme === "da") {
+      this.renderDaTheme(elements);
+    }
+  }
+
+  private renderCodeTheme(
+    elements: {
+      backToMenuButton: HTMLButtonElement;
+      winnerPlayerNameElement: HTMLSpanElement;
+      winnerPlayerIconElement: HTMLSpanElement;
+    },
+    assets: {
+      confetti: string;
+      confettiExtra: string;
+      cupIcon: string;
+    },
+  ): void {
+    const confettiBackground = document.getElementById("confetti-background") as HTMLDivElement;
+    confettiBackground.innerHTML = confettiBackgroundTemplate(
+      assets.confetti,
+      assets.confettiExtra,
+    );
+
+    this.container.classList.add("winner-overlay--code");
+    elements.backToMenuButton.innerText = "Back to start";
+  }
+
+  private renderDaTheme(elements: {
+    backToMenuButton: HTMLButtonElement;
+    winnerPlayerNameElement: HTMLSpanElement;
+    winnerPlayerIconElement: HTMLSpanElement;
+  }): void {
+    const chessFigureIconOutline = uiIcons.chessFigureOutlineBig();
+
+    elements.winnerPlayerNameElement.classList.remove("player-blue", "player-orange");
+    elements.winnerPlayerIconElement.innerHTML = `
+      <span class="winner-overlay__icon" id="winner-overlay-icon">${chessFigureIconOutline}</span>
+    `;
   }
 }
